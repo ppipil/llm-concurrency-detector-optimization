@@ -1,0 +1,48 @@
+# Third-party checkouts
+detectors/*
+!detectors/README.md
+workspaces/
+
+# Build products
+build/
+out/
+bin/
+obj/
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+*.dll
+*.exe
+*.lib
+*.pdb
+*.obj
+
+# Profilers and diagnostics
+*.etl
+*.etlx
+*.vsp
+*.vspx
+*.diagsession
+*.trace
+*.speedscope.json
+*.prof
+profiles/
+
+# Large/raw experiment outputs
+results/raw/
+results/tmp/
+
+# Python and .NET local state
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+packages/
+BenchmarkDotNet.Artifacts/
+
+# Credentials and local environment
+.env
+.env.*
+*.key
+*.pem
+secrets/

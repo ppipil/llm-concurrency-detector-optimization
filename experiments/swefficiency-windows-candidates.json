@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "status": "provisional_static_shortlist_not_windows_verified",
+  "observed_on": "2026-10-05",
+  "benchmark_repository": {
+    "url": "https://github.com/swefficiency/swefficiency",
+    "commit": "12d32a2d6800824a7d84bdb6797b5708e7b7957f"
+  },
+  "measurement_notice": "Runtime and speedup values are references from the official gold report, not local Windows measurements.",
+  "candidates": [
+    {
+      "priority": 1,
+      "instance_id": "sympy__sympy-20228",
+      "repo": "sympy/sympy",
+      "base_commit": "c237fe7f4c1a4abcfaef0e79600e26cba4ac0a6d",
+      "expert_touched_files": ["sympy/functions/elementary/complexes.py"],
+      "expert_patch_length": 28,
+      "gold_pre_edit_runtime_seconds": 6.086644432891626,
+      "gold_speedup_ratio": 186.0715489291747,
+      "pass_to_pass_count": 285,
+      "covering_test_file_count": 8,
+      "windows_status": "candidate_not_executed"
+    },
+    {
+      "priority": 2,
+      "instance_id": "sympy__sympy-21391",
+      "repo": "sympy/sympy",
+      "base_commit": "8ddf9c29e345df987e82f8c5905dd0b32ea0a4b6",
+      "expert_touched_files": ["sympy/polys/domains/gaussiandomains.py"],
+      "expert_patch_length": 27,
+      "gold_pre_edit_runtime_seconds": 4.9105195684009235,
+      "gold_speedup_ratio": 2.1310333517730013,
+      "pass_to_pass_count": 877,
+      "covering_test_file_count": 40,
+      "windows_status": "candidate_not_executed"
+    },
+    {
+      "priority": 3,
+      "instance_id": "sympy__sympy-16134",
+      "repo": "sympy/sympy",
+      "base_commit": "2dd1275d6050605f517b030c92e9ef30c75eab45",
+      "expert_touched_files": ["sympy/logic/boolalg.py"],
+      "expert_patch_length": 47,
+      "gold_pre_edit_runtime_seconds": 22.03899430539459,
+      "gold_speedup_ratio": 8785.43450010004,
+      "pass_to_pass_count": 50,
+      "covering_test_file_count": 1,
+      "windows_status": "candidate_not_executed"
+    },
+    {
+      "priority": 4,
+      "instance_id": "sympy__sympy-19270",
+      "repo": "sympy/sympy",
+      "base_commit": "37df6c20f5fd7511e18685de40a4d47928c3ac88",
+      "expert_touched_files": ["sympy/polys/polytools.py"],
+      "expert_patch_length": 58,
+      "gold_pre_edit_runtime_seconds": 0.4955576346057933,
+      "gold_speedup_ratio": 1.3233946307655027,
+      "pass_to_pass_count": 816,
+      "covering_test_file_count": 37,
+      "windows_status": "candidate_not_executed"
+    },
+    {
+      "priority": 5,
+      "instance_id": "dask__dask-5501",
+      "repo": "dask/dask",
+      "base_commit": "6d878e68248a12f15bb958951111efe8b030d9e8",
+      "expert_touched_files": ["dask/utils.py"],
+      "expert_patch_length": 18,
+      "gold_pre_edit_runtime_seconds": 0.659778610500507,
+      "gold_speedup_ratio": 4.008214991759636,
+      "pass_to_pass_count": 183,
+      "covering_test_file_count": 7,
+      "windows_status": "candidate_not_executed"
+    }
+  ]
+}
