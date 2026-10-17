@@ -1,0 +1,30 @@
+{
+  "name": "llm-performance-context-research",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.19.0"
+  },
+  "scripts": {
+    "probe:pi-sdk": "node scripts/research-controller/pi-sdk-probe.mjs",
+    "smoke:pi-cslab": "node scripts/research-controller/pi-cslab-tool-loop.mjs",
+    "reproduce:sympy-20228": "node scripts/research-controller/reproduce-sympy-20228.mjs",
+    "evaluate:sympy-20228": "node scripts/evaluation/evaluate-sympy-20228.mjs",
+    "evaluate:sympy-21391-sanity": "node scripts/evaluation/evaluate-sympy-21391-sanity.mjs",
+    "profile:sympy-20228": "workspaces\\m2-sympy-20228\\.venv\\Scripts\\python.exe scripts\\performance-evidence\\collect_sympy_20228.py",
+    "m5:agent": "node scripts/experiments/run-m5-agent.mjs",
+    "m5c:agent": "node scripts/experiments/run-m5-agent.mjs",
+    "m5d:agent": "node scripts/experiments/run-m5-agent.mjs --mode m5d-fast",
+    "m5:summarize": "node scripts/experiments/summarize-m5.mjs",
+    "m5b:summarize": "node scripts/experiments/summarize-m5b.mjs",
+    "m5c:summarize": "node scripts/experiments/summarize-m5c.mjs",
+    "m5d:summarize": "node scripts/experiments/summarize-m5d.mjs",
+    "m5f:prompt-examples": "node scripts/research-controller/generate-m5f-prompt-examples.mjs",
+    "test:evaluator": "node --test scripts/evaluation/*.test.mjs",
+    "test:controller": "node --test scripts/research-controller/*.test.mjs"
+  },
+  "dependencies": {
+    "@earendil-works/pi-coding-agent": "1.0.3"
+  }
+}

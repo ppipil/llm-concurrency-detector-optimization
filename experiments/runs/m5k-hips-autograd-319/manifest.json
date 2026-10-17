@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "classification": "real-repository positive capability calibration; excluded from formal experiment data",
+  "task": {
+    "task_id": "hips_autograd_319",
+    "repository": "HIPS/autograd",
+    "base_commit": "809e1b2ba5d7b9d76a7e1a5b67a10089a9c9052a",
+    "group": "B0",
+    "agent_visible_task": "experiments/tasks/formulacode-hips-autograd-319/agent/task.md",
+    "gold_or_evaluator_metadata_exposed": false
+  },
+  "agent": {
+    "harness": "@earendil-works/pi-coding-agent@1.0.3",
+    "provider": "cslab",
+    "model": "CS/DeepSeek-V4-Flash-FP8"
+  },
+  "policy": {
+    "name": "diagnostic-calibration-v2",
+    "max_model_turns": 30,
+    "max_tool_calls": 45,
+    "wall_clock_ms": 600000,
+    "bash_default_timeout_seconds": 60,
+    "provider_token_action_stop": false,
+    "emergency_provider_usage_cap": null
+  },
+  "trajectory": {
+    "first_concrete_hypothesis_ms": 17852,
+    "first_edit_ms": 58582,
+    "first_targeted_test_ms": 61468,
+    "model_turns": 27,
+    "tool_calls": 35,
+    "tool_counts": {
+      "bash": 32,
+      "read": 2,
+      "edit": 1
+    },
+    "wall_clock_ms": 205119,
+    "termination_reason": "assistant_complete",
+    "patch_present": true
+  },
+  "correctness": {
+    "command": ".venv\\Scripts\\python.exe -m pytest tests\\test_scalar_ops.py tests\\test_systematic.py::test_tanh -q --disable-warnings",
+    "exit_code": 0,
+    "passed": 42,
+    "warnings": 17
+  },
+  "benchmark": {
+    "workload": "benchmarks.bench_rnn.RNNSuite.time_rnn_grad",
+    "warmups": 1,
+    "repetitions": 7,
+    "baseline_samples_seconds": [
+      0.27240679999977147,
+      0.2694351000000097,
+      0.2654805000001943,
+      0.2621563000002425,
+      0.27129450000029465,
+      0.26618730000063806,
+      0.26812949999930424
+    ],
+    "optimized_samples_seconds": [
+      0.27489020000211895,
+      0.26174600000376813,
+      0.2568203999835532,
+      0.26289519999409094,
+      0.25409090000903234,
+      0.2620865000062622,
+      0.26185280000208877
+    ],
+    "baseline_mean_seconds": 0.267870000000065,
+    "baseline_median_seconds": 0.26812949999930424,
+    "baseline_std_seconds": 0.0035593583217055397,
+    "optimized_mean_seconds": 0.2620545714287021,
+    "optimized_median_seconds": 0.26185280000208877,
+    "optimized_std_seconds": 0.006537246845631168,
+    "speedup": 1.0221916700008613
+  },
+  "evidence": {
+    "patch": "experiments/runs/m5k-hips-autograd-319/agent.patch",
+    "human_summary": "docs/m5k-hips-autograd-calibration.md",
+    "raw_local_directory": "results/raw/m5k/hips_autograd_319/B0-run-20261017",
+    "raw_local_directory_committed": false
+  }
+}

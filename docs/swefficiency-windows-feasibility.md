@@ -1,8 +1,10 @@
 # SWE-fficiency Native Windows Feasibility Study
 
+> **Current-plan note:** The task-structure, Windows-feasibility, and candidate-screening evidence in this document supports the repository-level performance tasks required by Research Plan v2. It is static feasibility evidence, not a record of successful Native-Windows execution.
+
 ## Scope and evidence status
 
-This study investigates whether a small subset of SWE-fficiency can support a native-Windows pilot for the project. It does not change the research questions, baselines, or proposed detector-aware method. It also does not treat SWE-fficiency tasks as concurrency detectors: the benchmark is useful for developing and validating a performance-agent harness before applying that harness to a detector.
+This study investigates whether a small subset of SWE-fficiency can support a native-Windows pilot for Performance-Aware Context Management. It does not change the frozen research questions, B0–B3 baselines, or evaluation metrics.
 
 No task repository was built or benchmarked during this study. The task classifications below are static feasibility judgments based on the official benchmark repository, dataset rows, gold report, and workload source. A task becomes **Windows-verified** only after its exact base commit builds, its unchanged correctness oracle passes, and its unchanged workload produces repeatable measurements on the native-Windows host.
 

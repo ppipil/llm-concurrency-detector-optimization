@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "performance-evidence.schema.json",
+  "title": "Normalized Runtime Performance Evidence",
+  "type": "object",
+  "required": ["schema_version", "evidence_type", "run_id", "task", "workload", "profiler", "profiler_run", "environment", "profile", "artifacts"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "evidence_type": { "const": "runtime_profile" },
+    "run_id": { "type": "string", "minLength": 1 },
+    "task": {
+      "type": "object",
+      "required": ["instance_id", "repository", "revision", "workspace_clean_before", "workspace_unchanged_after"],
+      "properties": {
+        "instance_id": { "type": "string" },
+        "repository": { "type": "string" },
+        "revision": { "type": "string" },
+        "workspace": { "type": "string" },
+        "workspace_clean_before": { "type": "boolean" },
+        "workspace_unchanged_after": { "type": "boolean" }
+      }
+    },
+    "workload": {
+      "type": "object",
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": { "type": "string" },
+        "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "benchmark_protocol_reference": { "type": "string" }
+      }
+    },
+    "profiler": {
+      "type": "object",
+      "required": ["name", "implementation", "version", "source_line_semantics"],
+      "properties": {
+        "name": { "type": "string" },
+        "implementation": { "type": "string" },
+        "version": { "type": "string" },
+        "clock": { "type": "string" },
+        "source_line_semantics": { "type": "string" }
+      }
+    },
+    "profiler_run": {
+      "type": "object",
+      "required": ["status", "measurement_kind", "benchmark_eligible", "profiler_overhead_included", "command"],
+      "properties": {
+        "status": { "enum": ["PASS", "FAIL"] },
+        "measurement_kind": { "const": "profiling" },
+        "benchmark_eligible": { "const": false },
+        "profiler_overhead_included": { "const": true },
+        "command": { "type": "string" },
+        "wall_time_seconds": { "type": "number", "minimum": 0 }
+      }
+    },
+    "environment": { "type": "object" },
+    "profile": {
+      "type": "object",
+      "required": ["profiled_self_time_total_seconds", "function_count", "relationship_count", "functions", "call_relationships"],
+      "properties": {
+        "profiled_self_time_total_seconds": { "type": "number", "minimum": 0 },
+        "function_count": { "type": "integer", "minimum": 0 },
+        "relationship_count": { "type": "integer", "minimum": 0 },
+        "functions": { "type": "array", "items": { "$ref": "#/$defs/functionEvidence" } },
+        "call_relationships": { "type": "array", "items": { "$ref": "#/$defs/callRelationship" } }
+      }
+    },
+    "artifacts": { "type": "object" }
+  },
+  "$defs": {
+    "nullableNumber": { "type": ["number", "null"] },
+    "nullableInteger": { "type": ["integer", "null"] },
+    "functionEvidence": {
+      "type": "object",
+      "required": ["id", "function", "source_file", "source_line", "primitive_call_count", "total_call_count", "self_time_seconds", "cumulative_time_seconds", "runtime_share_percent", "cumulative_share_percent", "ownership", "repository_owned"],
+      "properties": {
+        "id": { "type": "string" },
+        "function": { "type": "string" },
+        "source_file": { "type": "string" },
+        "source_line": { "type": ["integer", "null"] },
+        "primitive_call_count": { "type": "integer", "minimum": 0 },
+        "total_call_count": { "type": "integer", "minimum": 0 },
+        "self_time_seconds": { "type": "number", "minimum": 0 },
+        "cumulative_time_seconds": { "type": "number", "minimum": 0 },
+        "runtime_share_percent": { "type": "number", "minimum": 0 },
+        "cumulative_share_percent": { "type": "number", "minimum": 0 },
+        "ownership": { "enum": ["repository", "external_dependency", "standard_library", "built_in", "evaluator"] },
+        "repository_owned": { "type": "boolean" }
+      }
+    },
+    "callRelationship": {
+      "type": "object",
+      "required": ["caller_id", "callee_id", "primitive_call_count", "total_call_count", "self_time_seconds", "cumulative_time_seconds"],
+      "properties": {
+        "caller_id": { "type": "string" },
+        "callee_id": { "type": "string" },
+        "primitive_call_count": { "$ref": "#/$defs/nullableInteger" },
+        "total_call_count": { "$ref": "#/$defs/nullableInteger" },
+        "self_time_seconds": { "$ref": "#/$defs/nullableNumber" },
+        "cumulative_time_seconds": { "$ref": "#/$defs/nullableNumber" }
+      }
+    }
+  }
+}

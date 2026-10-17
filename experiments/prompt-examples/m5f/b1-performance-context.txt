@@ -1,0 +1,52 @@
+PROFILER EVIDENCE
+source=cProfile 3.10.8; ordering=mechanical descending runtime; top_k=8; profiling times include overhead and are not benchmark runtimes; evaluator and measurement-wrapper frames are filtered only for information-boundary safety.
+
+SYMBOLS
+F1 dup_mul @ sympy/polys/densearith.py:735
+F2 <built-in method builtins.max> @ ~:?
+F3 <built-in method builtins.min> @ ~:?
+F4 dup_sqr @ sympy/polys/densearith.py:835
+F5 _randbelow_with_getrandbits @ D:/pp/app/Python10/Lib/random.py:239
+F6 <method 'append' of 'list' objects> @ ~:?
+F7 <listcomp> @ sympy/polys/densearith.py:536
+F8 shuffle @ D:/pp/app/Python10/Lib/random.py:380
+F9 <built-in method builtins.exec> @ ~:?
+F10 sympify @ sympy/core/sympify.py:92
+F11 parse_expr @ sympy/parsing/sympy_parser.py:908
+F12 <built-in method builtins.eval> @ ~:?
+F13 eval_expr @ sympy/parsing/sympy_parser.py:896
+F14 wrapper @ sympy/core/cache.py:69
+F15 __new__ @ sympy/core/function.py:450
+F16 __new__ @ sympy/core/function.py:270
+F17 <module> @ <string>:1
+F18 eval @ sympy/functions/elementary/complexes.py:333
+
+SELF_TIME_TOP_8
+1 F1 calls=387500 self=50.382429s share=61.36%
+2 F2 calls=25064244 self=3.319769s share=4.04%
+3 F3 calls=24713531 self=3.106888s share=3.78%
+4 F4 calls=12340 self=2.433050s share=2.96%
+5 F5 calls=4127741 self=1.993758s share=2.43%
+6 F6 calls=25426656 self=1.815120s share=2.21%
+7 F7 calls=269800 self=1.276059s share=1.55%
+8 F8 calls=250553 self=1.255218s share=1.53%
+
+CUMULATIVE_TIME_TOP_8
+1 F9 calls=657 cumulative=82.112577s
+2 F10 calls=459249 cumulative=81.080250s
+3 F11 calls=10 cumulative=81.079179s
+4 F12 calls=78 cumulative=81.063344s
+5 F13 calls=10 cumulative=81.060312s
+6 F14 calls=376112 cumulative=81.059825s
+7 F15 calls=3566 cumulative=80.936808s
+8 F16 calls=3566 cumulative=80.934490s
+
+CALL_EDGES_TOP_8
+1 F10>F11 calls=10 cumulative=81.079179s
+2 F11>F13 calls=10 cumulative=81.060312s
+3 F13>F12 calls=10 cumulative=81.060298s
+4 F14>F15 calls=28 cumulative=80.936808s
+5 F17>F14 calls=20 cumulative=80.935143s
+6 F15>F14 calls=28 cumulative=80.934579s
+7 F14>F16 calls=28 cumulative=80.934490s
+8 F16>F18 calls=10 cumulative=80.933364s

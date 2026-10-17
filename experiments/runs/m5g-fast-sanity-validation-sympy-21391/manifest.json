@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "experiment": "M5g FAST sanity validation",
+  "status": "SANITY_FAIL_NO_ACTION_LOOP",
+  "run_id": "m5g-20261007T100830.157Z",
+  "formal_experiment": false,
+  "task": "sympy__sympy-21391",
+  "repository": "https://github.com/sympy/sympy.git",
+  "revision": "8ddf9c29e345df987e82f8c5905dd0b32ea0a4b6",
+  "protocol": {
+    "version": "fast-sanity-v1",
+    "scope": "development/sanity-check only",
+    "accounted_token_ceiling": 60000,
+    "wall_clock_seconds": 240,
+    "max_tool_calls": 12,
+    "max_model_turns": 8,
+    "bash_default_timeout_seconds": 30
+  },
+  "groups": {
+    "B0": {
+      "termination": "token_budget",
+      "termination_kind": "soft",
+      "outcome": "NO_PATCH",
+      "source_patch": false,
+      "time_to_first_edit_ms": null,
+      "time_to_first_targeted_test_ms": null,
+      "agent_driven_tests": [],
+      "tokens": {
+        "input": 24891,
+        "output": 1077,
+        "cache_read": 34048,
+        "cache_write": 0,
+        "total": 60016
+      },
+      "tool_calls": 11,
+      "model_turns": 7,
+      "wall_clock_ms": 58085,
+      "tool_counts": {
+        "read": 7,
+        "grep": 3,
+        "bash": 1,
+        "edit": 0,
+        "write": 0
+      },
+      "repeated_profiling": false,
+      "repeated_search": "initial implementation-location search duplicated through bash and grep"
+    },
+    "B1": {
+      "termination": "token_budget",
+      "termination_kind": "soft",
+      "outcome": "NO_PATCH",
+      "source_patch": false,
+      "time_to_first_edit_ms": null,
+      "time_to_first_targeted_test_ms": null,
+      "agent_driven_tests": [],
+      "tokens": {
+        "input": 25743,
+        "output": 1643,
+        "cache_read": 36352,
+        "cache_write": 0,
+        "total": 63738
+      },
+      "tool_calls": 10,
+      "model_turns": 6,
+      "wall_clock_ms": 37187,
+      "tool_counts": {
+        "read": 4,
+        "grep": 3,
+        "bash": 3,
+        "edit": 0,
+        "write": 0
+      },
+      "repeated_profiling": false,
+      "repeated_search": "three consecutive test-location shell searches after the source hypothesis"
+    }
+  },
+  "information_boundary": {
+    "b0_profiler_evidence": false,
+    "b1_profiler_evidence": "M5f mechanical Top-8 context",
+    "evaluator_or_gold_supplied": false
+  },
+  "conclusion": {
+    "m5_status": "PARTIAL",
+    "can_enter_m6": false,
+    "freeze_current_harness_and_prompt": false,
+    "lifecycle_abort_reproduced": false
+  },
+  "raw_evidence": {
+    "B0": "results/raw/m5d/m5g-20261007T100830.157Z/B0",
+    "B1": "results/raw/m5d/m5g-20261007T100830.157Z/B1"
+  }
+}

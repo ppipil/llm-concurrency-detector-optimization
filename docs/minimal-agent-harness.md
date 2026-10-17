@@ -1,5 +1,7 @@
 # Minimal Performance Agent Harness
 
+> **Historical design note:** This document predates Research Plan v2. Its path-isolation, evidence-capture, and evaluator-safety ideas remain useful, but Pi Mono is now the provisional experimental harness and the B0–B3 definitions in `RESEARCH_PLAN.md v2` and `docs/system-design.md` supersede the treatment-group wording below. This document is not an instruction to build a replacement coding-agent harness.
+
 ## Status and boundary
 
 This is a design specification, not an optimization run. The current phase allows baseline preparation and tool validation only. The `edit` capability is therefore implemented in the interface design but must be disabled by policy until the user explicitly starts an optimization experiment.
@@ -108,9 +110,9 @@ During the current phase, the final state is `PROFILE_CAPTURED` or earlier. No t
 - Before every test/benchmark, the Harness checks protected-file hashes. After every run, it records `git status --porcelain` and the full patch.
 - Test and benchmark subprocess trees are terminated on timeout using Windows process controls.
 
-## Treatment-group compatibility
+## Historical treatment-group sketch — superseded
 
-All groups use the same five tools and task manifests. Group differences are limited to information supplied before the run:
+The following A/B/C sketch is retained only as historical context and must not be used for experiments:
 
 - A: repository/task information only;
 - B: the same information plus profiler evidence;

@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "experiment": "M5b B0/B1 baseline completion run",
+  "status": "COMPLETED_PARTIAL",
+  "valid_results": {
+    "B0": "results/raw/m5/20261006T162449.939Z/B0",
+    "B1": "results/raw/m5/20261006T163833.506Z/B1",
+    "aggregate": "results/raw/m5b/baseline-completion-20261007"
+  },
+  "excluded_infrastructure_failures": [
+    "results/raw/m5/20261006T161920.772Z/B0 (CSLab request timeout)",
+    "results/raw/m5/20261006T162449.939Z/B1 (CSLab request timeout)"
+  ],
+  "task": "sympy__sympy-20228",
+  "repository": "https://github.com/sympy/sympy.git",
+  "revision": "c237fe7f4c1a4abcfaef0e79600e26cba4ac0a6d",
+  "relationship_to_m5": "Repeat the validated M5 B0/B1 pipeline with only a shared execution-budget increase; treatments and evaluation method are unchanged.",
+  "groups": {
+    "B0": "task, repository, and correctness/performance objective only",
+    "B1": "B0 input plus mechanically rendered M4 profiler tables, with evaluator and measurement-wrapper frames removed for information-boundary safety"
+  },
+  "fixed_agent": {
+    "harness": "@earendil-works/pi-coding-agent@1.0.3",
+    "provider": "CSLab",
+    "api": "openai-completions",
+    "base_url": "https://llm.cs.cityu.edu.hk/v1",
+    "model": "CS/DeepSeek-V4-Flash-FP8",
+    "thinking_level": "off",
+    "tools": ["read", "grep", "edit", "write", "bash"],
+    "compaction": false,
+    "retry": false
+  },
+  "fixed_budget": {
+    "wall_clock_seconds": 600,
+    "tool_calls": 30,
+    "assistant_messages": 20,
+    "accounted_tokens": 80000,
+    "max_output_tokens_per_response": 8192,
+    "limiter_note": "Token accounting is checked at completed-message boundaries and may overshoot by the final response. Tool-call termination is requested after the 30th tool completes."
+  },
+  "prompt_change": "Both groups receive the same instruction to form a patch early and reserve budget for tests.",
+  "reproduction_prompt_mode": "completion",
+  "execution_order": ["B0 agent", "B1 agent", "B0 evaluator", "B1 evaluator"],
+  "evaluation": {
+    "harness": "M3 minimal-evaluation-harness 0.1.0",
+    "benchmark_processes": 3,
+    "comparison_baseline": "results/raw/m2/sympy__sympy-20228/20261006T080440.869Z/summary.json"
+  },
+  "isolation": {
+    "B0_workspace": "workspaces/m5-b2-b0-sympy-20228",
+    "B1_workspace": "workspaces/m5-b3-b1-sympy-20228",
+    "forbidden_agent_inputs": [
+      "hidden benchmark implementation",
+      "correctness oracle selection",
+      "gold patch",
+      "gold-touched files",
+      "gold runtime or speedup",
+      "post-edit evaluator results"
+    ]
+  }
+}

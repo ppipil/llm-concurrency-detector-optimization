@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "experiment": "M5d FAST sanity check",
+  "status": "SANITY_FAIL_HARNESS_BLOCKER",
+  "run_id": "20261007T034634.504Z",
+  "results": {
+    "B0": "NO_PATCH; edit attempted at 137758 ms but aborted by turn-limit termination",
+    "B1": "NO_PATCH; no edit attempt",
+    "targeted_tests": "none",
+    "post_patch_evaluators": "skipped",
+    "supports_20228_task_specific_failure": false,
+    "can_enter_m6": false
+  },
+  "formal_experiment": false,
+  "task": "sympy__sympy-21391",
+  "repository": "https://github.com/sympy/sympy.git",
+  "revision": "8ddf9c29e345df987e82f8c5905dd0b32ea0a4b6",
+  "protocol": {
+    "version": "fast-sanity-v1",
+    "scope": "development/sanity-check only",
+    "does_not_modify": "agent-execution-v1",
+    "accounted_token_ceiling": 60000,
+    "wall_clock_seconds": 240,
+    "max_tool_calls": 12,
+    "max_model_turns": 8,
+    "bash_default_timeout_seconds": 30
+  },
+  "groups": {
+    "B0": "task and repository only; no profiler evidence",
+    "B1": "same input plus task-specific baseline cProfile evidence"
+  },
+  "post_run": {
+    "no_source_patch": "NO_PATCH; skip evaluator",
+    "source_patch": "targeted correctness test plus five unprofiled benchmark sanity samples; no 30-sample M3 evaluation"
+  },
+  "information_boundary": {
+    "agent_visible": ["agent/task.md", "clean checkout", "B1 profiler evidence only"],
+    "evaluator_only": ["workload", "test selection", "baseline timings", "all expert/gold information"]
+  }
+}

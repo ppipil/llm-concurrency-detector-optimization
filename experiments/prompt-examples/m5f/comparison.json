@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "taskId": "sympy__sympy-20228",
+  "comparisonBasis": "Archived actual M5c prompts versus M5f unified prompt skeleton",
+  "before": {
+    "b0UserPrompt": {
+      "characters": 1710,
+      "utf8Bytes": 1710,
+      "words": 239,
+      "lines": 32
+    },
+    "b1UserPrompt": {
+      "characters": 9360,
+      "utf8Bytes": 9360,
+      "words": 994,
+      "lines": 100
+    },
+    "b1ProfilerEvidence": {
+      "characters": 7648,
+      "utf8Bytes": 7648,
+      "words": 755,
+      "lines": 67
+    }
+  },
+  "after": {
+    "systemPrompt": {
+      "characters": 459,
+      "utf8Bytes": 459,
+      "words": 67,
+      "lines": 5
+    },
+    "b0UserPrompt": {
+      "characters": 2174,
+      "utf8Bytes": 2174,
+      "words": 310,
+      "lines": 42
+    },
+    "b1UserPrompt": {
+      "characters": 4254,
+      "utf8Bytes": 4254,
+      "words": 525,
+      "lines": 93
+    },
+    "b1ProfilerEvidence": {
+      "characters": 2118,
+      "utf8Bytes": 2118,
+      "words": 219,
+      "lines": 52
+    }
+  },
+  "b0B1Difference": "Only the PERFORMANCE CONTEXT body: B0 has no pre-supplied evidence; B1 has mechanically ordered profiler evidence.",
+  "profilerPolicy": {
+    "topK": 8,
+    "ordering": "mechanical descending runtime",
+    "intelligentRanking": false
+  }
+}

@@ -19,7 +19,19 @@
       "gold_speedup_ratio": 186.0715489291747,
       "pass_to_pass_count": 285,
       "covering_test_file_count": 8,
-      "windows_status": "candidate_not_executed"
+      "windows_status": "verified_native_windows_m2_pass",
+      "local_validation": {
+        "observed_on": "2026-10-06",
+        "python": "CPython 3.10.8",
+        "correctness_exit_code": 0,
+        "correctness_summary": "288 passed, 7 skipped, 8 expected to fail",
+        "benchmark_process_repetitions": 3,
+        "benchmark_samples": 30,
+        "mean_runtime_seconds": 4.829266803331363,
+        "runtime_stdev_seconds": 0.24815634059570651,
+        "runtime_cv_percent": 5.138592475870692,
+        "evidence": "results/raw/m2/sympy__sympy-20228/20261006T080440.869Z"
+      }
     },
     {
       "priority": 2,

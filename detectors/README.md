@@ -1,5 +1,7 @@
-# Third-party detectors
+# Historical detector workspace
 
-Clone candidate detector repositories into this directory for local experiments. Detector contents are ignored by Git so that upstream source and project-owned experiment code remain clearly separated.
+This directory belongs to the superseded detector-focused phase of the project. It is retained only so earlier research context is not erased.
 
-For every candidate, record the upstream URL and immutable commit hash in an experiment manifest before building or testing it.
+Do not start new DRace, ESBMC, Coyote, Threadcheck, or other detector work here during the current Interim stage. The active project studies Performance-Aware Context Management using repository-level performance tasks.
+
+Future third-party task checkouts belong under ignored `workspaces/`, not in this directory.

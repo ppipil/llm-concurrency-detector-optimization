@@ -1,0 +1,15 @@
+{
+  "providers": {
+    "cslab": {
+      "baseUrl": "https://REPLACE_WITH_CSLAB_ENDPOINT/v1",
+      "api": "openai-completions",
+      "apiKey": "CSLAB_API_KEY",
+      "models": [
+        {
+          "id": "CS/DeepSeek-V4-Flash-FP8",
+          "name": "CSLab DeepSeek V4 Flash FP8"
+        }
+      ]
+    }
+  }
+}

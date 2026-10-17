@@ -1,0 +1,2 @@
+# Resolved runtime dependency from the successful 2026-10-06 Windows baseline.
+mpmath==1.4.1

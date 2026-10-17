@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "instance_id": "sympy__sympy-20228",
+  "repository": "https://github.com/sympy/sympy.git",
+  "base_commit": "c237fe7f4c1a4abcfaef0e79600e26cba4ac0a6d",
+  "dataset_source": "https://huggingface.co/datasets/swefficiency/swefficiency",
+  "dataset_split": "test",
+  "dataset_row_offset_observed": 475,
+  "environment_setup_commit": "c237fe7f4c1a4abcfaef0e79600e26cba4ac0a6d",
+  "upstream_rebuild_command": "pip install -e .",
+  "upstream_test_command": "PYTHONWARNINGS='ignore::UserWarning,ignore::SyntaxWarning' bin/test --no-subprocess --verbose",
+  "pass_to_pass_count": 285,
+  "fail_to_pass_count": 0,
+  "correctness_test_files": [
+    "sympy/functions/elementary/tests/test_integers.py",
+    "sympy/functions/elementary/tests/test_interface.py",
+    "sympy/functions/elementary/tests/test_complexes.py",
+    "sympy/functions/elementary/tests/test_miscellaneous.py",
+    "sympy/functions/elementary/tests/test_hyperbolic.py",
+    "sympy/functions/elementary/tests/test_piecewise.py",
+    "sympy/functions/elementary/tests/test_exponential.py",
+    "sympy/functions/elementary/tests/test_trigonometric.py"
+  ],
+  "windows_correctness_command": ".venv\\Scripts\\python.exe bin\\test --no-subprocess --verbose --no-colors <eight covering test files>",
+  "workload_file": "workload_windows.py",
+  "benchmark_protocol": {
+    "process_repetitions": 3,
+    "timeit_number_per_sample": 1,
+    "timeit_samples_per_process": 10,
+    "total_timed_samples": 30,
+    "warmup_samples_discarded": 0,
+    "fresh_process_per_repetition": true,
+    "cache_policy": "sympy.core.cache.clear_cache is executed by timeit setup before each timed sample",
+    "profiler_enabled": false,
+    "process_affinity": "not pinned",
+    "process_priority": "default"
+  },
+  "separation": {
+    "agent_visible": [
+      "clean repository checkout at base_commit",
+      "agent/task.md"
+    ],
+    "evaluator_only": [
+      "this manifest",
+      "workload_windows.py",
+      "correctness test file list",
+      "raw runtime and test evidence",
+      "official gold runtime and speedup references",
+      "expert patch and expert-touched-file metadata"
+    ]
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "experiment": "M5c frozen Agent execution protocol validation",
+  "status": "PROTOCOL_PASS_M5_PARTIAL",
+  "run_id": "20261006T170423.670Z",
+  "results": {
+    "root": "results/raw/m5c/20261006T170423.670Z",
+    "B0": "NO_PATCH",
+    "B1": "NO_PATCH",
+    "protocol_validation": "PASS",
+    "m5_status": "PARTIAL"
+  },
+  "task": "sympy__sympy-20228",
+  "repository": "https://github.com/sympy/sympy.git",
+  "revision": "c237fe7f4c1a4abcfaef0e79600e26cba4ac0a6d",
+  "execution_protocol": {
+    "version": "agent-execution-v1",
+    "scope": "all subsequent B0/B1/B2/B3 experiments",
+    "accounted_token_ceiling": 100000,
+    "wall_clock_seconds": 600,
+    "max_tool_calls": 20,
+    "max_assistant_turns": 12,
+    "bash_default_timeout_seconds": 60,
+    "max_output_tokens_per_response": 8192,
+    "limiter_note": "Token and turn limits are checked at completed-message boundaries. Tool termination is requested after the twentieth tool completes. Bash timeout is injected by the controller when the model omits timeout."
+  },
+  "groups": {
+    "B0": "task, repository, and correctness/performance objective only",
+    "B1": "B0 input plus mechanically rendered M4 profiler tables, with evaluator and measurement-wrapper frames removed for information-boundary safety"
+  },
+  "fixed_agent": {
+    "harness": "@earendil-works/pi-coding-agent@1.0.3",
+    "provider": "CSLab",
+    "api": "openai-completions",
+    "base_url": "https://llm.cs.cityu.edu.hk/v1",
+    "model": "CS/DeepSeek-V4-Flash-FP8",
+    "thinking_level": "off",
+    "tools": ["read", "grep", "edit", "write", "bash"],
+    "compaction": false,
+    "retry": false
+  },
+  "prompt_policy": [
+    "diagnose, implement one concrete performance optimization, and run targeted tests",
+    "do not spend the entire budget only analyzing",
+    "do not enlarge formal workload inputs for expensive exploration",
+    "do not read evaluator-only or gold information"
+  ],
+  "evaluation_policy": {
+    "patch_present": "run the complete M3 evaluator",
+    "no_patch": "classify as NO_PATCH and do not run the 30-sample benchmark"
+  },
+  "execution_order": ["B0 agent", "conditional B0 evaluator", "B1 agent", "conditional B1 evaluator"],
+  "isolation": {
+    "B0_workspace": "workspaces/m5-c-b0-sympy-20228",
+    "B1_workspace": "workspaces/m5-c-b1-sympy-20228",
+    "forbidden_agent_inputs": [
+      "hidden benchmark implementation",
+      "correctness oracle selection",
+      "gold patch",
+      "gold-touched files",
+      "gold runtime or speedup",
+      "post-edit evaluator results"
+    ]
+  }
+}

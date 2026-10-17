@@ -8,9 +8,14 @@ build/
 out/
 bin/
 obj/
+node_modules/
+npm-debug.log*
+*.log
 cmake-build-*/
 CMakeFiles/
 CMakeCache.txt
+dist/
+coverage/
 *.dll
 *.exe
 *.lib
@@ -36,13 +41,23 @@ results/tmp/
 __pycache__/
 *.py[cod]
 .pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.asv/
 .venv/
+venv/
+env/
+*.egg-info/
 packages/
 BenchmarkDotNet.Artifacts/
 
 # Credentials and local environment
 .env
 .env.*
+!.env.example
 *.key
 *.pem
+*.p12
+*.pfx
 secrets/

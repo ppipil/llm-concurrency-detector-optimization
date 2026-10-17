@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "experiment": "M5 B0/B1 preliminary baseline",
+  "status": "PRELIMINARY",
+  "valid_run_id": "20261006T154942.346Z",
+  "superseded_invalid_run_id": "20261006T153437.032Z",
+  "task": "sympy__sympy-20228",
+  "repository": "https://github.com/sympy/sympy.git",
+  "revision": "c237fe7f4c1a4abcfaef0e79600e26cba4ac0a6d",
+  "groups": {
+    "B0": "task, repository, and correctness/performance objective only",
+    "B1": "B0 input plus mechanically rendered M4 profiler tables, with evaluator and measurement-wrapper frames removed for information-boundary safety"
+  },
+  "fixed_agent": {
+    "harness": "@earendil-works/pi-coding-agent@1.0.3",
+    "provider": "CSLab",
+    "api": "openai-completions",
+    "base_url": "https://llm.cs.cityu.edu.hk/v1",
+    "model": "CS/DeepSeek-V4-Flash-FP8",
+    "thinking_level": "off",
+    "tools": ["read", "grep", "edit", "write", "bash"],
+    "compaction": false,
+    "retry": false
+  },
+  "fixed_budget": {
+    "wall_clock_seconds": 600,
+    "tool_calls": 20,
+    "assistant_messages": 12,
+    "accounted_tokens": 40000,
+    "max_output_tokens_per_response": 8192
+  },
+  "execution_order": ["B0 agent", "B1 agent", "B0 evaluator", "B1 evaluator"],
+  "evaluation": {
+    "harness": "M3 minimal-evaluation-harness 0.1.0",
+    "benchmark_processes": 3,
+    "comparison_baseline": "results/raw/m2/sympy__sympy-20228/20261006T080440.869Z/summary.json"
+  },
+  "isolation": {
+    "B0_workspace": "workspaces/m5-r1-b0-sympy-20228",
+    "B1_workspace": "workspaces/m5-r1-b1-sympy-20228",
+    "forbidden_agent_inputs": [
+      "hidden benchmark implementation",
+      "correctness oracle selection",
+      "gold patch",
+      "gold-touched files",
+      "gold runtime or speedup",
+      "post-edit evaluator results"
+    ]
+  }
+}

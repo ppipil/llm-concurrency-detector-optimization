@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "instance_id": "sympy__sympy-21391",
+  "repository": "https://github.com/sympy/sympy.git",
+  "base_commit": "8ddf9c29e345df987e82f8c5905dd0b32ea0a4b6",
+  "correctness_test_file": "sympy/polys/domains/tests/test_domains.py",
+  "workload_file": "workload_sanity.py",
+  "benchmark_protocol": {
+    "purpose": "development sanity check only",
+    "fixed_seed": 42,
+    "elements_per_domain": 10000,
+    "samples": 5,
+    "profiler_enabled_for_benchmark": false
+  },
+  "separation": {
+    "agent_visible": ["clean repository checkout at base_commit", "agent/task.md"],
+    "evaluator_only": ["this manifest", "workload_sanity.py", "correctness-test selection", "runtime evidence", "all expert/gold metadata"]
+  }
+}
