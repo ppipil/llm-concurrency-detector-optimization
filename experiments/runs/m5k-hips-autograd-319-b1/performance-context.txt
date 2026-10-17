@@ -1,0 +1,50 @@
+PROFILER EVIDENCE
+source=cProfile 3.10.8; ordering=mechanical descending runtime; top_k=8; profiling times include overhead and are not benchmark runtimes; evaluator and measurement-wrapper frames are filtered only for information-boundary safety.
+
+SYMBOLS
+F1 <built-in method numpy.core._multiarray_umath.implement_array_function> @ ~:?
+F2 <method 'randn' of 'numpy.random.mtrand.RandomState' objects> @ ~:?
+F3 mut_add @ autograd/core.py:209
+F4 __call__ @ autograd/core.py:70
+F5 backward_pass @ autograd/core.py:30
+F6 grad_tensordot @ autograd/numpy/numpy_grads.py:287
+F7 delete @ <workspace>/.venv/Lib/site-packages/numpy/lib/function_base.py:4999
+F8 tensordot @ <workspace>/.venv/Lib/site-packages/numpy/core/numeric.py:949
+F9 time_rnn_grad @ benchmarks/bench_rnn.py:42
+F10 rnn_grad @ benchmarks/bench_rnn.py:39
+F11 wrapped @ autograd/errors.py:46
+F12 gradfun @ autograd/convenience_wrappers.py:17
+F13 dot @ <__array_function__ internals>:177
+F14 vjp @ autograd/core.py:17
+F15 vjp @ autograd/core.py:87
+F16 grad_dot @ autograd/numpy/numpy_grads.py:278
+
+SELF_TIME_TOP_8
+1 F1 calls=2219 self=0.228765s share=72.46%
+2 F2 calls=5 self=0.019097s share=6.05%
+3 F3 calls=107 self=0.015917s share=5.04%
+4 F4 calls=597 self=0.014940s share=4.73%
+5 F5 calls=1 self=0.010100s share=3.20%
+6 F6 calls=101 self=0.002087s share=0.66%
+7 F7 calls=202 self=0.001744s share=0.55%
+8 F8 calls=101 self=0.001741s share=0.55%
+
+CUMULATIVE_TIME_TOP_8
+1 F9 calls=1 cumulative=0.293692s
+2 F10 calls=1 cumulative=0.293690s
+3 F11 calls=1 cumulative=0.293521s
+4 F12 calls=1 cumulative=0.292665s
+5 F4 calls=597 cumulative=0.284978s
+6 F1 calls=2219 cumulative=0.237874s
+7 F13 calls=152 cumulative=0.227348s
+8 F14 calls=1 cumulative=0.220399s
+
+CALL_EDGES_TOP_8
+1 F9>F10 calls=1 cumulative=0.293690s
+2 F10>F11 calls=1 cumulative=0.293521s
+3 F11>F12 calls=1 cumulative=0.292665s
+4 F13>F1 calls=152 cumulative=0.227079s
+5 F12>F14 calls=1 cumulative=0.220399s
+6 F14>F5 calls=1 cumulative=0.220194s
+7 F5>F15 calls=268 cumulative=0.189078s
+8 F15>F16 calls=101 cumulative=0.178944s

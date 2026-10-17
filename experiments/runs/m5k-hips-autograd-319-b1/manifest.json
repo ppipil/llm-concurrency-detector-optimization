@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "record_status": "immutable_calibration_checkpoint",
+  "classification": "B1 profiler-guided real-repository calibration; excluded from formal experiment data",
+  "task": {
+    "task_id": "hips_autograd_319",
+    "repository": "HIPS/autograd",
+    "base_commit": "809e1b2ba5d7b9d76a7e1a5b67a10089a9c9052a",
+    "group": "B1",
+    "gold_or_post_edit_b0_information_exposed": false
+  },
+  "agent": {
+    "harness": "@earendil-works/pi-coding-agent@1.0.3",
+    "provider": "cslab",
+    "model": "CS/DeepSeek-V4-Flash-FP8"
+  },
+  "policy": {
+    "name": "diagnostic-calibration-v2",
+    "max_model_turns": 30,
+    "max_tool_calls": 45,
+    "wall_clock_ms": 600000,
+    "bash_default_timeout_seconds": 60,
+    "provider_token_action_stop": false,
+    "emergency_provider_usage_cap": null
+  },
+  "profiler_evidence": {
+    "profiler": "cProfile 3.10.8",
+    "run_id": "20261017T150105.401Z",
+    "generated_before_agent": true,
+    "workspace_clean_before": true,
+    "workspace_unchanged_after": true,
+    "revision": "809e1b2ba5d7b9d76a7e1a5b67a10089a9c9052a",
+    "top_k": 8,
+    "format": "mechanical self-time, cumulative-time, and caller-callee ordering",
+    "normalized_evidence_sha256": "8a4918e40776c66cb37cc78ceaa7da59b5e4f0a475cc42233ce041dc3e9f60ca",
+    "public_normalized_context": "experiments/runs/m5k-hips-autograd-319-b1/performance-context.txt",
+    "public_normalization": "absolute workspace prefix replaced with <workspace>; raw injected bytes remain local and are identified by SHA-256"
+  },
+  "trajectory": {
+    "first_concrete_hypothesis_ms": 32132,
+    "first_concrete_hypothesis_turn": 6,
+    "first_edit_ms": 79040,
+    "first_edit_turn": 12,
+    "first_targeted_test_ms": 82171,
+    "first_targeted_test_turn": 13,
+    "model_turns": 30,
+    "tool_calls": 44,
+    "tool_counts": {
+      "bash": 43,
+      "edit": 1
+    },
+    "wall_clock_ms": 341110,
+    "termination_reason": "model_turn_budget",
+    "termination_kind": "soft",
+    "patch_present": true
+  },
+  "usage": {
+    "provider_total": 826506,
+    "uncached_input": 90477,
+    "cache_read": 720896,
+    "cache_write": 0,
+    "output": 15133,
+    "reasoning": 0,
+    "provider_requests": 30,
+    "current_context_tokens": 46006,
+    "context_window": 128000
+  },
+  "correctness": {
+    "command": ".venv\\Scripts\\python.exe -m pytest tests\\test_scalar_ops.py tests\\test_systematic.py::test_tanh -q --disable-warnings",
+    "exit_code": 0,
+    "passed": 42,
+    "warnings": 17
+  },
+  "benchmark": {
+    "workload": "benchmarks.bench_rnn.RNNSuite.time_rnn_grad",
+    "warmups": 1,
+    "repetitions": 7,
+    "baseline_samples_seconds": [0.2922633999842219, 0.26598110000486486, 0.2968395999923814, 0.2979637999960687, 0.29989179997937754, 0.28467799999634735, 0.28296419998514466],
+    "optimized_samples_seconds": [0.2626130999997258, 0.2617618000076618, 0.266943499998888, 0.2684208000137005, 0.2624739999882877, 0.2500694000045769, 0.2637045999872498],
+    "baseline_mean_seconds": 0.2886545571340581,
+    "optimized_mean_seconds": 0.26228388571429867,
+    "speedup": 1.1005424765152538
+  },
+  "artifacts": {
+    "patch": "experiments/runs/m5k-hips-autograd-319-b1/agent.patch",
+    "human_summary": "docs/m5k-b1-profiler-guided-calibration.md",
+    "raw_profile_directory": "results/raw/profiles/hips_autograd_319/B1-pre-agent-20261017",
+    "raw_run_directory": "results/raw/m5k/hips_autograd_319/B1-run-20261017",
+    "raw_sha256": {
+      "prompt.md": "d5f75c1949097acea07e7c2cd69ce4cdea9f5795b5500c5dc15daaac1184a296",
+      "performance-context.txt": "391673b73b1babdc251666db7bfde39cca4e79e2b7811432c99314a21ac4ccf1",
+      "events.jsonl": "359ffb69fea471aa0786ca54426a52ad74be475a4b64d2f6b6cb436035de54b6",
+      "transcript.json": "b3840b4ef9ada2b58f9e641b1f45de76177715d6bdbdafa80078093a639d022c",
+      "patch.diff": "072dc047c0c9f1fb1e26c9cd6c17c2d7dd43dc37bbcbff8f8fd6548e63f1952f",
+      "before-benchmark.json": "7ca54b3a0eb3f2ee2c043d77cabaae3ad2bcd9ea2294112eef9686b6fee08eaf",
+      "after-benchmark.json": "47ea90099f0b100b559098de424706a1df067d27e44702fbd38af659efaa003a"
+    }
+  }
+}

@@ -1,4 +1,5 @@
 import { spawn } from "node:child_process";
+import { createHash } from "node:crypto";
 import { existsSync } from "node:fs";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
@@ -19,7 +20,11 @@ import {
 } from "../research-controller/calibration-policy.mjs";
 import { createContextCapacitySnapshot } from "../research-controller/context-capacity.mjs";
 import { createExecutionLifecycle } from "../research-controller/execution-lifecycle.mjs";
-import { buildAgentPrompt, buildAgentSystemPrompt } from "../research-controller/prompt-builder.mjs";
+import {
+  buildAgentPrompt,
+  buildAgentSystemPrompt,
+  renderMechanicalProfilerEvidence,
+} from "../research-controller/prompt-builder.mjs";
 import { classifyTermination } from "../research-controller/termination.mjs";
 import { createUsageTelemetry } from "../research-controller/usage-telemetry.mjs";
 
@@ -31,9 +36,14 @@ const TASK_PATH = process.env.M5K_TASK_PATH
   ? resolve(process.env.M5K_TASK_PATH)
   : join(ROOT, "experiments", "tasks", "formulacode-optuna-3672", "agent", "task.md");
 const TASK_ID = process.env.M5K_TASK_ID ?? "optuna_optuna_3672";
+const GROUP = process.env.M5K_GROUP ?? "B0";
 const EVIDENCE_DIR = process.env.M5K_EVIDENCE_DIR
   ? resolve(process.env.M5K_EVIDENCE_DIR)
-  : join(ROOT, "results", "raw", "m5k", TASK_ID, "B0");
+  : join(ROOT, "results", "raw", "m5k", TASK_ID, GROUP);
+const PROFILE_EVIDENCE_PATH = process.env.M5K_PROFILE_EVIDENCE
+  ? resolve(process.env.M5K_PROFILE_EVIDENCE)
+  : null;
+const EXPECTED_REVISION = process.env.M5K_BASE_COMMIT ?? null;
 const PROVIDER = "cslab";
 const BASE_URL = "https://llm.cs.cityu.edu.hk/v1";
 const MODEL_ID = "CS/DeepSeek-V4-Flash-FP8";
@@ -88,24 +98,58 @@ function textOf(message) {
 
 async function main() {
   if (process.platform !== "win32") throw new Error("Native Windows only");
+  if (!["B0", "B1"].includes(GROUP)) throw new Error(`Unsupported calibration group: ${GROUP}`);
   const apiKey = process.env.CSLAB_API_KEY;
   if (!apiKey) throw new Error("CSLAB_API_KEY is missing from the current process");
 
   const revision = (await run("git.exe", ["rev-parse", "HEAD"], WORKSPACE)).stdout.trim();
+  if (EXPECTED_REVISION && revision !== EXPECTED_REVISION) {
+    throw new Error(`Unexpected calibration revision: ${revision}`);
+  }
   const initialStatus = (await run("git.exe", ["status", "--porcelain"], WORKSPACE)).stdout.trim();
   if (initialStatus) throw new Error(`Calibration workspace must start clean:\n${initialStatus}`);
   await mkdir(EVIDENCE_DIR, { recursive: true });
 
   const taskDescription = await readFile(TASK_PATH, "utf8");
+  let performanceContext = "";
+  let performanceEvidence = null;
+  if (GROUP === "B1") {
+    if (!PROFILE_EVIDENCE_PATH) throw new Error("M5K_PROFILE_EVIDENCE is required for B1");
+    const normalizedPath = PROFILE_EVIDENCE_PATH.replaceAll("\\", "/").toLowerCase();
+    if (!normalizedPath.includes("/results/raw/profiles/")) {
+      throw new Error("B1 evidence must come from the pre-Agent profiling output tree");
+    }
+    const rawEvidence = await readFile(PROFILE_EVIDENCE_PATH, "utf8");
+    const profileDocument = JSON.parse(rawEvidence);
+    if (profileDocument.evidence_type !== "runtime_profile") {
+      throw new Error("B1 evidence is not runtime profiler evidence");
+    }
+    if (profileDocument.task?.instance_id !== TASK_ID || profileDocument.task?.revision !== revision) {
+      throw new Error("B1 evidence task or revision does not match the calibration checkout");
+    }
+    if (profileDocument.profiler_run?.status !== "PASS" || profileDocument.profiler_run?.benchmark_eligible !== false) {
+      throw new Error("B1 evidence must be a successful profiling-only measurement");
+    }
+    performanceContext = renderMechanicalProfilerEvidence(profileDocument);
+    performanceEvidence = {
+      source: PROFILE_EVIDENCE_PATH,
+      sha256: createHash("sha256").update(rawEvidence).digest("hex"),
+      runId: profileDocument.run_id,
+      profiler: profileDocument.profiler?.name,
+      topK: 8,
+      generatedBeforeAgent: true,
+    };
+  }
   const prompt = buildAgentPrompt({
     taskDescription,
-    performanceContext: "",
+    performanceContext,
     resourceControl: CALIBRATION_RESOURCE_CONTROL,
     runClassification: "FormulaCode easy real-repository capability calibration only, not formal experiment data",
   });
   const systemPrompt = buildAgentSystemPrompt();
   await writeFile(join(EVIDENCE_DIR, "prompt.md"), prompt, "utf8");
   await writeFile(join(EVIDENCE_DIR, "system-prompt.md"), systemPrompt, "utf8");
+  await writeFile(join(EVIDENCE_DIR, "performance-context.txt"), `${performanceContext}\n`, "utf8");
 
   const gitBash = await findGitBash();
   const modelRuntime = await ModelRuntime.create({ modelsPath: null, refreshOnCreate: false });
@@ -211,7 +255,7 @@ async function main() {
     protocol: CALIBRATION_PROTOCOL_VERSION,
     resourceControl: CALIBRATION_RESOURCE_CONTROL,
     repository: { taskId: TASK_ID, workspace: WORKSPACE, revision, finalStatus: status.stdout, changedFiles },
-    agent: { provider: PROVIDER, baseUrl: BASE_URL, model: MODEL_ID, tools: TOOLS, agentDrivenTests },
+    agent: { group: GROUP, provider: PROVIDER, baseUrl: BASE_URL, model: MODEL_ID, tools: TOOLS, performanceEvidence, agentDrivenTests },
     execution: lifecycleState,
     usage,
     context,

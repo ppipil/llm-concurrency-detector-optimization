@@ -1,6 +1,7 @@
 import argparse
 import json
 import os
+from pathlib import Path
 import statistics
 import sys
 import time
@@ -22,6 +23,7 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--samples", type=int, default=7)
     parser.add_argument("--warmups", type=int, default=1)
+    parser.add_argument("--output", type=Path)
     args = parser.parse_args()
 
     for _ in range(args.warmups):
@@ -35,7 +37,11 @@ def main() -> None:
         "median_seconds": statistics.median(samples),
         "std_seconds": statistics.stdev(samples) if len(samples) > 1 else 0.0,
     }
-    print(json.dumps(payload, indent=2))
+    rendered = json.dumps(payload, indent=2)
+    if args.output:
+        args.output.parent.mkdir(parents=True, exist_ok=True)
+        args.output.write_text(rendered + "\n", encoding="utf-8")
+    print(rendered)
 
 
 if __name__ == "__main__":

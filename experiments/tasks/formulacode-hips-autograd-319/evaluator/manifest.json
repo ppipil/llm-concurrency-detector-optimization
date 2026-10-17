@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "instance_id": "hips_autograd_319",
+  "repository": "https://github.com/HIPS/autograd.git",
+  "base_commit": "809e1b2ba5d7b9d76a7e1a5b67a10089a9c9052a",
+  "dataset_source": "FormulaCode human-validated verified subset",
+  "windows_correctness_command": ".venv\\Scripts\\python.exe -m pytest tests\\test_scalar_ops.py tests\\test_systematic.py::test_tanh -q --disable-warnings",
+  "workload_file": "../../../../scripts/evaluation/benchmark-formulacode-autograd-319.py",
+  "benchmark_protocol": {
+    "warmups": 1,
+    "samples": 7,
+    "profiler_enabled": false,
+    "process_affinity": "not pinned",
+    "process_priority": "default"
+  },
+  "separation": {
+    "agent_visible": [
+      "clean repository checkout at base_commit",
+      "agent/task.md",
+      "B1 mechanical profiler evidence"
+    ],
+    "evaluator_only": [
+      "this manifest",
+      "raw runtime and test evidence",
+      "gold patch and gold-touched-file metadata",
+      "B0 patch and post-edit B0 results"
+    ]
+  }
+}

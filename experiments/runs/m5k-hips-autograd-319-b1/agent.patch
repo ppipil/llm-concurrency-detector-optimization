@@ -1,0 +1,13 @@
+diff --git a/autograd/numpy/numpy_grads.py b/autograd/numpy/numpy_grads.py
+index 9a34516..fc1f6a5 100644
+--- a/autograd/numpy/numpy_grads.py
++++ b/autograd/numpy/numpy_grads.py
+@@ -72,7 +72,7 @@ anp.arccos.defvjp(lambda g, ans, vs, gvs, x :-g / anp.sqrt(1 - x**2))
+ anp.arctan.defvjp(lambda g, ans, vs, gvs, x : g / (1 + x**2))
+ anp.sinh.defvjp(  lambda g, ans, vs, gvs, x : g * anp.cosh(x))
+ anp.cosh.defvjp(  lambda g, ans, vs, gvs, x : g * anp.sinh(x))
+-anp.tanh.defvjp(  lambda g, ans, vs, gvs, x : g / anp.cosh(x) **2)
++anp.tanh.defvjp(  lambda g, ans, vs, gvs, x : g * (1 - ans**2))
+ anp.arcsinh.defvjp(lambda g, ans, vs, gvs, x : g / anp.sqrt(x**2 + 1))
+ anp.arccosh.defvjp(lambda g, ans, vs, gvs, x : g / anp.sqrt(x**2 - 1))
+ anp.arctanh.defvjp(lambda g, ans, vs, gvs, x : g / (1 - x**2))
