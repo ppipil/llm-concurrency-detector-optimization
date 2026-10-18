@@ -1,0 +1,22 @@
+PERFORMANCE-AWARE CONTEXT
+selector=performance-aware-context-mvp-v1; ranking=deterministic weighted evidence; budget_chars=1810; profiler times include overhead and are not benchmark runtimes.
+weights=runtime:0.25 calls:0.1 task_call_relevance:0.3 editability:0.2 test_support:0.15 minus_risk:0.1
+Use these selected targets as bounded evidence, not as a required patch location.
+
+TARGET 1 score=0.849915
+symbol=_pop_waiting_trial_id @ optuna/study/study.py:1058
+runtime=self 0.002240s (0.74%), cumulative 0.214291s, calls 500
+features=runtime:0.705159 calls:0.664827 relevance:1 editable:1 tests:1 risk:0.428571
+source=def _pop_waiting_trial_id(self) -> int | None:
+call_relation=called_by action @ scripts/evaluation/benchmark-formulacode-optuna-5993.py:63 (500 calls)
+related_tests=tests/artifacts_tests/test_download_artifact.py, tests/artifacts_tests/test_list_artifact_meta.py, tests/artifacts_tests/test_upload_artifact.py
+selection_reason=high measured runtime contribution; frequent execution; task terms at source: pop, study, trial, waiting; repository-owned source is directly editable; 76 related test file(s) discovered
+
+TARGET 2 score=0.583700
+symbol=number @ optuna/trial/_frozen.py:366
+runtime=self 0.001139s (0.37%), cumulative 0.001139s, calls 10501
+features=runtime:0.003747 calls:0.990226 relevance:0.5 editable:1 tests:0.986842 risk:0.142857
+source=@property
+call_relation=called_by create_new_trial @ optuna/storages/_in_memory.py:153 (10001 calls)
+related_tests=tests/artifacts_tests/test_download_artifact.py, tests/artifacts_tests/test_list_artifact_meta.py, tests/artifacts_tests/test_upload_artifact.py
+selection_reason=frequent execution; task terms at source: trial; repository-owned source is directly editable; 75 related test file(s) discovered

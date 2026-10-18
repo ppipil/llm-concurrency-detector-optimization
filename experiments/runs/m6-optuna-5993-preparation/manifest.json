@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "record_status": "frozen_pre_agent_preparation",
+  "classification": "M6 task preparation; no B0/B1/B2 Agent run and no formal comparison result",
+  "task": {
+    "task_id": "optuna_optuna_5993",
+    "repository": "optuna/optuna",
+    "base_commit": "d763594b1c081695e1fd14283210802521b59649",
+    "workspace_source_modified": false,
+    "gold_or_post_edit_information_used": false
+  },
+  "environment": {
+    "platform": "Native Windows",
+    "python": "CPython 3.10.8",
+    "optuna": "4.3.0.dev editable base-commit checkout",
+    "numpy": "2.2.6",
+    "sqlalchemy": "2.0.55",
+    "pytest": "8.3.5",
+    "fakeredis": "2.40.0"
+  },
+  "evaluator": {
+    "manifest": "experiments/tasks/formulacode-optuna-5993/evaluator/manifest.json",
+    "runner": "scripts/evaluation/evaluate-formulacode-optuna-5993.py",
+    "benchmark": "scripts/evaluation/benchmark-formulacode-optuna-5993.py",
+    "correctness_passed": 6,
+    "baseline_run_1_cv": 0.01910285393587633,
+    "baseline_run_2_cv": 0.027456762124634163,
+    "relative_mean_difference": 0.004955
+  },
+  "profiler": {
+    "name": "cProfile 3.10.8",
+    "status": "PASS",
+    "benchmark_eligible": false,
+    "workspace_unchanged_after": true,
+    "function_count": 149,
+    "relationship_count": 208,
+    "primary_self_hotspot": "optuna/storages/_in_memory.py:380:<listcomp>",
+    "primary_cumulative_path": "Study._pop_waiting_trial_id -> InMemoryStorage.get_all_trials -> WAITING-state list comprehension"
+  },
+  "context_read_checks": {
+    "b1": {
+      "status": "PASS",
+      "mechanical_context_characters": 1810,
+      "contains_pop_waiting_trial_id": true,
+      "contains_get_all_trials": true
+    },
+    "b2": {
+      "status": "PASS",
+      "character_limit": 1810,
+      "characters_used": 1776,
+      "selected": [
+        "optuna/study/study.py:1058:_pop_waiting_trial_id",
+        "optuna/trial/_frozen.py:366:number"
+      ]
+    }
+  },
+  "information_boundary": {
+    "agent_visible": "agent/task.md includes the public performance symptom and exact frozen workload dimensions; B0/B1/B2 differ only by the frozen performance-context group input",
+    "evaluator_only": "contract tests, evaluator manifest, raw samples, raw profile, selector audit, gold patch/touched files, and post-edit results remain outside Agent workspaces"
+  },
+  "measured_phase_seconds": {
+    "checkout": 25.898,
+    "environment_install": 48.488,
+    "successful_direct_repository_tests": 0.808,
+    "benchmark_calibration_and_two_frozen_runs": 11.707,
+    "profiler": 1.115,
+    "b1_b2_read_checks": 1.473,
+    "artifact_and_selector_validation": 0.527
+  },
+  "raw_artifacts": {
+    "baseline_directory": "results/raw/m6/optuna_optuna_5993/baseline-frozen-20261018",
+    "repeat_directory": "results/raw/m6/optuna_optuna_5993/baseline-repeat-20261018",
+    "profile_directory": "results/raw/profiles/optuna_optuna_5993/baseline-frozen-20261018",
+    "context_check_directory": "results/raw/context-selector/optuna_optuna_5993/baseline-read-check-20261018",
+    "sha256": {
+      "evaluation.json": "f1eb6f9f0cb32aafb560495f91a5d8fe92a57ee327131cbc145dc84fbff05486",
+      "benchmark.json": "47a7e811f2d32dda8f4b99ec39a5129db2d37709af7c872646d4fe752bdedea4",
+      "repeat-benchmark.json": "46b1074fbd7205d14a8db4a1283c827027370e40ea6afd558582b0ba2ee6bad8",
+      "evidence.json": "0d7a916c7371d5682f6de94934d33a4ab2b1065fbcd3c4493eb5e530f39e1f5b",
+      "profile.prof": "6606e541542bd8e4a7929acae74dbc3873316979494567af1d519d0fdc63b2c2",
+      "raw_b1_context": "399574d6048b8c1e6d42d9e711bb202d74aa5b66d5fa4880e0d179c5de338be1",
+      "raw_b2_context": "4b4e33810ec2038987c65978b3db86614d21e93b0c938ec1cc7aeb343bfae096",
+      "raw_b2_selector_audit": "6b5b9273a8191059a3bc78a94f8d7b82dc2e3a7b5e9d2961b6cad829d9fef155"
+    }
+  }
+}

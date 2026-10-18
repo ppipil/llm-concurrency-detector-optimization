@@ -1,0 +1,4 @@
+numpy==2.2.6
+sqlalchemy==2.0.55
+pytest==8.3.5
+fakeredis[lua]==2.40.0

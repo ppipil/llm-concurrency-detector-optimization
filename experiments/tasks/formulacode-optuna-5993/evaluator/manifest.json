@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "instance_id": "optuna_optuna_5993",
+  "repository": "https://github.com/optuna/optuna.git",
+  "base_commit": "d763594b1c081695e1fd14283210802521b59649",
+  "dataset_source": "FormulaCode human-validated verified subset",
+  "native_windows_environment": {
+    "python": "CPython 3.10.8",
+    "requirements": "requirements-windows.txt",
+    "editable_install": true
+  },
+  "correctness": {
+    "repository_tests": [
+      "tests/study_tests/test_study.py::test_pop_waiting_trial_thread_safe[inmemory]",
+      "tests/storages_tests/test_storages.py::test_delete_study[inmemory]",
+      "tests/storages_tests/test_storages.py::test_set_trial_state_values_for_state[inmemory]"
+    ],
+    "evaluator_contract_test": "test_optuna_5993_contract.py"
+  },
+  "benchmark": {
+    "runner": "../../../../scripts/evaluation/benchmark-formulacode-optuna-5993.py",
+    "warmups": 5,
+    "primary_samples": 15,
+    "primary_iterations_per_sample": 500,
+    "non_waiting_trials": 10000,
+    "profiler_enabled": false,
+    "process_affinity": "not pinned",
+    "process_priority": "default"
+  },
+  "outcome_rule": {
+    "status": "provisional_same_as_m3",
+    "meaningful_gain_fraction": 0.1,
+    "correctness_failure_precedence": "REGRESSION"
+  },
+  "profiling": {
+    "profiler": "CPython cProfile/pstats",
+    "workload_callable": "profile_primary",
+    "benchmark_eligible": false
+  },
+  "separation": {
+    "agent_visible": [
+      "clean repository checkout at base_commit",
+      "agent/task.md including the fixed workload dimensions",
+      "B1 mechanical profiler evidence or B2 selected context according to group"
+    ],
+    "evaluator_only": [
+      "this manifest and correctness contract test",
+      "raw runtime, test, and profiler artifacts",
+      "gold patch, gold-touched files, and post-edit reference results"
+    ]
+  }
+}
