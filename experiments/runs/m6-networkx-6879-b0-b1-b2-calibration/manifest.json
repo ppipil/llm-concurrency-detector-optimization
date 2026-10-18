@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "classification": "single real-Agent B0/B1/B2 calibration; not formal statistical evidence",
+  "pre_agent_checkpoint": "ae2bd35",
+  "task": {
+    "instance_id": "networkx_networkx_6879",
+    "repository": "networkx/networkx",
+    "base_commit": "588326364848a165b045e419a63a4e62d568c615"
+  },
+  "shared_conditions": {
+    "platform": "Native Windows",
+    "python": "3.10.8",
+    "numpy": "1.23.5",
+    "scipy": "1.10.1",
+    "pytest": "7.4.4",
+    "pi": "1.0.3",
+    "model": "CS/DeepSeek-V4-Flash-FP8",
+    "model_turns": 30,
+    "tool_calls": 45,
+    "wall_clock_seconds": 600,
+    "bash_timeout_seconds": 60,
+    "historical_experience_used": false,
+    "gold_or_post_edit_information_used": false
+  },
+  "baseline": {
+    "primary_mean_seconds": 0.11258523998161157,
+    "primary_cv": 0.04194988040825726,
+    "independent_repeat_mean_seconds": 0.11055979332886637,
+    "independent_repeat_cv": 0.04948610777680083
+  },
+  "groups": {
+    "B0": {
+      "context": "none",
+      "first_edit_ms": 23306,
+      "first_edit_turn": 5,
+      "first_targeted_test_ms": 25691,
+      "first_targeted_test_turn": 6,
+      "correctness_passed": 7,
+      "primary_mean_seconds": 0.05781496000709012,
+      "primary_cv": 0.03508706714934626,
+      "primary_speedup": 1.9473375051682942,
+      "primary_outcome": "SUCCESS",
+      "turns": 21,
+      "tools": 20,
+      "wall_clock_ms": 208037,
+      "provider_total_tokens": 181013,
+      "uncached_input_tokens": 29904,
+      "cache_read_tokens": 142080,
+      "output_tokens": 9029,
+      "termination": "assistant_complete"
+    },
+    "B1": {
+      "context": "mechanical profiler Top-8",
+      "evidence_sha256": "f19e2ce3f0c709ad35a703779ec3b2897a0897198002043473fd065c13f5355c",
+      "first_edit_ms": 40883,
+      "first_edit_turn": 7,
+      "first_targeted_test_ms": 90668,
+      "first_targeted_test_turn": 16,
+      "correctness_passed": 7,
+      "primary_mean_seconds": 0.3067040600037823,
+      "primary_cv": 0.07824528567729443,
+      "primary_speedup": 0.3670810225995155,
+      "primary_outcome": "PERFORMANCE_REGRESSION",
+      "turns": 27,
+      "tools": 28,
+      "wall_clock_ms": 223185,
+      "provider_total_tokens": 256901,
+      "uncached_input_tokens": 33743,
+      "cache_read_tokens": 215552,
+      "output_tokens": 7606,
+      "termination": "assistant_complete"
+    },
+    "B2": {
+      "context": "performance-aware-context-mvp-v1",
+      "context_sha256": "832243530d72b4ddb5d465de5e26fe3b3d9378a94bbe479ab5bb7813e73258f2",
+      "selector_audit_sha256": "274a825865bcb1aaee894eb26ac3c149d7cd155fcdc922beb2e32a5e60215e36",
+      "first_edit_ms": 38510,
+      "first_edit_turn": 5,
+      "first_targeted_test_ms": 44497,
+      "first_targeted_test_turn": 6,
+      "correctness_passed": 7,
+      "primary_mean_seconds": 0.26423768666184816,
+      "primary_cv": 0.13334509494728214,
+      "primary_speedup": 0.4260756344180754,
+      "primary_outcome": "PERFORMANCE_REGRESSION",
+      "turns": 18,
+      "tools": 21,
+      "wall_clock_ms": 157534,
+      "provider_total_tokens": 140299,
+      "uncached_input_tokens": 24548,
+      "cache_read_tokens": 110336,
+      "output_tokens": 5415,
+      "termination": "assistant_complete"
+    }
+  },
+  "raw_artifacts": {
+    "B0": {
+      "run": "results/raw/m6/networkx_networkx_6879/B0-run-20261018",
+      "evaluation": "results/raw/m6/networkx_networkx_6879/B0-evaluation-20261018",
+      "prompt_sha256": "f67a95b69fc5746c78c53112fbceaf2350db3ff055cb6d72492f86a5717d8094",
+      "events_sha256": "d4f0cc1637b6c1e434743bf637403047f240fa0d2dbe6a718b5215307e14410d",
+      "transcript_sha256": "3fae143ae7d775f6fabf036d2c5fb7ec1b01fa9541ae60b7478cff77ecc94dec",
+      "patch_sha256": "99909db2dcb3d421044e71367c19d1d2e1b217332e76e5e5c3e65db603f68bfc",
+      "evaluation_sha256": "9c6db65b27c435fa504cc7f5a92e058b732336dcb9dee38c174f207beb4dae14",
+      "benchmark_sha256": "c2cea1c5c4366889cca988c7fb0aeba93a0a57bc16445a0e75a664b437a81b36"
+    },
+    "B1": {
+      "run": "results/raw/m6/networkx_networkx_6879/B1-run-20261018",
+      "evaluation": "results/raw/m6/networkx_networkx_6879/B1-evaluation-20261018",
+      "prompt_sha256": "4e6b6bf1a66390c896ee891e938471d466d8f2a70e01c21d50df055e934d39a9",
+      "events_sha256": "18fee3a72c4a593265b7c92b0d34e1bebd91a93f8e604e3e0f65bb4b54309657",
+      "transcript_sha256": "6e5350771f5ab369dc17c3b374bfa4dcbb2d0b51cd4dcfb8421e7cbd7b70f0a6",
+      "patch_sha256": "94570f963299740ca2c0e4ae6ff533f66db6702c98f63f8ad6dabb86a2169c0a",
+      "evaluation_sha256": "27b0b077583215ad00a7c4ecc799a26bd6e2645c47803ec8c78436c1aa03f564",
+      "benchmark_sha256": "fb6bf7596e3b880b7459049ea75e046edbcd3a42b44c9e8ecebe3f3f46ebc63f"
+    },
+    "B2": {
+      "run": "results/raw/m6/networkx_networkx_6879/B2-run-20261018",
+      "evaluation": "results/raw/m6/networkx_networkx_6879/B2-evaluation-20261018",
+      "prompt_sha256": "9c8e51d322d579149cd0161973da3142374ce97f054a6fa786ea59e523d5358e",
+      "events_sha256": "8536ff1a93ab97cea392a614d8e7d230b24bb03283c5035e36ff1b3f9139aa5e",
+      "transcript_sha256": "d04f2292b90913b85bdf41ed7cd4d83d94df84c7f55762479c3fd12794d31250",
+      "patch_sha256": "00e2c2c466c41ad52359eb1210a4017a770f5b1041d3f18808564789aec6c29d",
+      "evaluation_sha256": "c94a37996deff744c761a903dea5fb8c05d99287be8c907b28ad9a6895c8b244",
+      "benchmark_sha256": "f561c02ee224bc099cf522737664e6e3f9ca59ac90d81bfc32b7a47809670e3e"
+    }
+  },
+  "measurement_uncertainty": {
+    "rule": "correctness first; primary speedup compared with provisional 10% threshold",
+    "note": "single sequential calibration runs; CV retained; no causal or statistical conclusion",
+    "b2_high_cv_flag": true
+  }
+}

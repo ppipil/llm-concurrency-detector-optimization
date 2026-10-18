@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "measurement_kind": "unprofiled_benchmark",
+  "primary": {
+    "workload": "networkx.rescale_layout on deterministic dense NumPy coordinates",
+    "iterations_per_sample": 100,
+    "points": 100000,
+    "dimensions": 3,
+    "warmups": 10,
+    "samples_seconds": [0.30228910001460463, 0.30144780001137406, 0.2921034999890253, 0.3879230000311509, 0.292319200001657, 0.29461579996859655, 0.32227209996199235, 0.30501519999234006, 0.31358300003921613, 0.2980571999796666, 0.29786230000900105, 0.29782140004681423, 0.3071312999818474, 0.2961314999847673, 0.29198850004468113],
+    "mean_seconds": 0.3067040600037823,
+    "median_seconds": 0.2980571999796666,
+    "std_seconds": 0.023998146793381997,
+    "cv": 0.07824528567729443,
+    "minimum_seconds": 0.29198850004468113,
+    "maximum_seconds": 0.3879230000311509
+  }
+}

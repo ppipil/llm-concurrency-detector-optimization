@@ -1,0 +1,23 @@
+diff --git a/networkx/drawing/layout.py b/networkx/drawing/layout.py
+index ad015a36..438af6de 100644
+--- a/networkx/drawing/layout.py
++++ b/networkx/drawing/layout.py
+@@ -1249,14 +1249,14 @@ def rescale_layout(pos, scale=1):
+     rescale_layout_dict
+     """
+     # Find max length over all dimensions
+-    lim = 0  # max coordinate for all axes
++    # Center each column in place, then find the global max magnitude
++    # with a single min/max scan instead of per-column Python loops.
+     for i in range(pos.shape[1]):
+         pos[:, i] -= pos[:, i].mean()
+-        lim = max(abs(pos[:, i]).max(), lim)
++    lim = max(abs(pos.min()), abs(pos.max()))
+     # rescale to (-scale, scale) in all directions, preserves aspect
+     if lim > 0:
+-        for i in range(pos.shape[1]):
+-            pos[:, i] *= scale / lim
++        pos *= scale / lim
+     return pos
+ 
+ 
