@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "measurement_kind": "unprofiled_benchmark",
+  "primary": {
+    "workload": "InMemoryStorage: pop one waiting trial after a 10000-trial non-waiting prefix and reset it to WAITING",
+    "iterations_per_sample": 500,
+    "non_waiting_trials": 10000,
+    "warmups": 5,
+    "samples_seconds": [
+      0.00641250004991889,
+      0.0059022000059485435,
+      0.005778700055088848,
+      0.005345100013073534,
+      0.005659299960825592,
+      0.00551599997561425,
+      0.0058317999937571585,
+      0.0056442999630235136,
+      0.005795600009150803,
+      0.006189399980939925,
+      0.005639999988488853,
+      0.0057027000002563,
+      0.005608200037386268,
+      0.0057833000319078565,
+      0.005514700023923069
+    ],
+    "mean_seconds": 0.00575492000595356,
+    "median_seconds": 0.0057027000002563,
+    "std_seconds": 0.0002663769074907691,
+    "cv": 0.04628681323375438,
+    "minimum_seconds": 0.005345100013073534,
+    "maximum_seconds": 0.00641250004991889
+  }
+}

@@ -1,0 +1,76 @@
+diff --git a/optuna/storages/_in_memory.py b/optuna/storages/_in_memory.py
+index 2fd6ecca2..c435e6cda 100644
+--- a/optuna/storages/_in_memory.py
++++ b/optuna/storages/_in_memory.py
+@@ -1,5 +1,6 @@
+ from __future__ import annotations
+ 
++import bisect
+ from collections.abc import Container
+ from collections.abc import Sequence
+ import copy
+@@ -165,6 +166,10 @@ class InMemoryStorage(BaseStorage):
+             trial._trial_id = trial_id
+             self._trial_id_to_study_id_and_number[trial_id] = (study_id, trial.number)
+             self._studies[study_id].trials.append(trial)
++            if trial.state == TrialState.WAITING:
++                # The new trial is appended to the end of the trials list, so it is
++                # also at the end of the waiting trial list.
++                self._studies[study_id].waiting_trial_numbers.append(trial.number)
+             self._update_cache(trial_id, study_id)
+             return trial_id
+ 
+@@ -270,6 +275,7 @@ class InMemoryStorage(BaseStorage):
+             if state == TrialState.RUNNING and trial.state != TrialState.WAITING:
+                 return False
+ 
++            old_state = trial.state
+             trial.state = state
+             if values is not None:
+                 trial.values = values
+@@ -285,6 +291,13 @@ class InMemoryStorage(BaseStorage):
+             else:
+                 self._set_trial(trial_id, trial)
+ 
++            study_id = self._trial_id_to_study_id_and_number[trial_id][0]
++            waiting_numbers = self._studies[study_id].waiting_trial_numbers
++            if old_state == TrialState.WAITING and state != TrialState.WAITING:
++                waiting_numbers.remove(trial.number)
++            elif old_state != TrialState.WAITING and state == TrialState.WAITING:
++                bisect.insort(waiting_numbers, trial.number)
++
+             return True
+ 
+     def _update_cache(self, trial_id: int, study_id: int) -> None:
+@@ -375,9 +388,13 @@ class InMemoryStorage(BaseStorage):
+         with self._lock:
+             self._check_study_id(study_id)
+ 
+-            trials = self._studies[study_id].trials
++            study = self._studies[study_id]
++            trials = study.trials
+             if states is not None:
+-                trials = [t for t in trials if t.state in states]
++                if states == (TrialState.WAITING,):
++                    trials = [study.trials[num] for num in study.waiting_trial_numbers]
++                else:
++                    trials = [t for t in trials if t.state in states]
+ 
+             if deepcopy:
+                 trials = copy.deepcopy(trials)
+@@ -399,9 +416,15 @@ class InMemoryStorage(BaseStorage):
+ class _StudyInfo:
+     def __init__(self, name: str, directions: list[StudyDirection]) -> None:
+         self.trials: list[FrozenTrial] = []
++        self.waiting_trial_numbers: list[int] = []
+         self.param_distribution: dict[str, distributions.BaseDistribution] = {}
+         self.user_attrs: dict[str, Any] = {}
+         self.system_attrs: dict[str, Any] = {}
+         self.name: str = name
+         self.directions: list[StudyDirection] = directions
+         self.best_trial_id: int | None = None
++
++    def __setstate__(self, state: dict[Any, Any]) -> None:
++        self.__dict__.update(state)
++        if "waiting_trial_numbers" not in self.__dict__:
++            self.waiting_trial_numbers = []
