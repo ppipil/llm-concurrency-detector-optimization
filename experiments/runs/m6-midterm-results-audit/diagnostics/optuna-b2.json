@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "classification": "independent audit diagnostic; not frozen evaluator output",
+  "label": "B2",
+  "optuna_version": "4.3.0.dev",
+  "checks": {
+    "waiting_order_after_reverse_transition": {
+      "status": "PASS",
+      "details": {
+        "expected_trial_id": 0,
+        "second_trial_id": 1,
+        "popped_trial_id": 0
+      }
+    },
+    "legacy_pickle_with_existing_waiting_trial": {
+      "status": "FAIL",
+      "error_type": "AssertionError",
+      "error": "expected restored waiting ids [0], got []"
+    }
+  }
+}

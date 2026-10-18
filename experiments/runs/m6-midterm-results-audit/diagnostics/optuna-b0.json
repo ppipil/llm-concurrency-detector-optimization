@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "classification": "independent audit diagnostic; not frozen evaluator output",
+  "label": "B0",
+  "optuna_version": "4.3.0.dev",
+  "checks": {
+    "waiting_order_after_reverse_transition": {
+      "status": "FAIL",
+      "error_type": "AssertionError",
+      "error": "expected trial id 0 (number 0) first, but popped 1"
+    },
+    "legacy_pickle_with_existing_waiting_trial": {
+      "status": "FAIL",
+      "error_type": "AttributeError",
+      "error": "'_StudyInfo' object has no attribute 'waiting_trial_ids'"
+    }
+  }
+}

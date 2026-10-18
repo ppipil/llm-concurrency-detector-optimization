@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "classification": "offline audit of twelve single-run calibrations; not formal statistical evidence",
+  "source_checkpoint": "c09811909526d0439a0e295b311bb55d9e67fb88",
+  "agent_runs_repeated": false,
+  "historical_results_overwritten": false,
+  "selector_changed": false,
+  "source_manifests": {
+    "hips_b0": {
+      "path": "experiments/runs/m5k-hips-autograd-319/manifest.json",
+      "sha256": "61440ce82a6c0818621a1af6ae0a117630f55491ff084f066d964464388581e0"
+    },
+    "hips_b1": {
+      "path": "experiments/runs/m5k-hips-autograd-319-b1/manifest.json",
+      "sha256": "b352ae731529fad1dcdc988a199fe06b597a12dfb529858be598ad607cd52688"
+    },
+    "hips_b2": {
+      "path": "experiments/runs/m6-hips-autograd-319-b2/manifest.json",
+      "sha256": "6859ce2d592ef2f9c9b9f40c494cb36ec453fb24ee4f8fe2cd2958782cfa5234"
+    },
+    "xarray": {
+      "path": "experiments/runs/m6-pydata-xarray-5541-b0-b1-b2-calibration/manifest.json",
+      "sha256": "082a5c8c5b27e879d41c41c4a2b05a008578a6bbfa6affa0252fe8cb15993554"
+    },
+    "networkx": {
+      "path": "experiments/runs/m6-networkx-6879-b0-b1-b2-calibration/manifest.json",
+      "sha256": "5c77c84603dec3fc2690121cdab070deb3f03cd54d48775fece0b639bca4a79d"
+    },
+    "optuna": {
+      "path": "experiments/runs/m6-optuna-5993-b0-b1-b2-calibration/manifest.json",
+      "sha256": "7d3d72b0b340daae53230d885dc31abe59a806b2c653b45cf7dbf5a722b5a3c8"
+    }
+  },
+  "independent_optuna_diagnostic": {
+    "script": {
+      "path": "experiments/runs/m6-midterm-results-audit/diagnostics/optuna_waiting_index_diagnostic.py",
+      "sha256": "4b01b66104a549c3bab4d9cd82e68b0c612f5e05786795f1e4535d6673a114c2"
+    },
+    "baseline": {
+      "path": "experiments/runs/m6-midterm-results-audit/diagnostics/optuna-baseline.json",
+      "sha256": "2b76c46a140d31ae879c6b88e0f24067484da7c0cb22252a4c55a388ccbf1bf0",
+      "waiting_order": "PASS",
+      "legacy_pickle": "PASS"
+    },
+    "B0": {
+      "path": "experiments/runs/m6-midterm-results-audit/diagnostics/optuna-b0.json",
+      "sha256": "e2f19a7fb944ab284f26ddbb529f0a35d4e209b08d66523120164602532547e2",
+      "waiting_order": "FAIL",
+      "legacy_pickle": "FAIL"
+    },
+    "B1": {
+      "path": "experiments/runs/m6-midterm-results-audit/diagnostics/optuna-b1.json",
+      "sha256": "d7d2e3ba4171381c7224065f6b79ade602344e50449b84cd7ece19c3f1b444f6",
+      "waiting_order": "FAIL",
+      "legacy_pickle": "FAIL"
+    },
+    "B2": {
+      "path": "experiments/runs/m6-midterm-results-audit/diagnostics/optuna-b2.json",
+      "sha256": "4a0f0366dcc892e60c2cf04d4809ad47d4fa26f8d35c729cb14371e37abea6d3",
+      "waiting_order": "PASS",
+      "legacy_pickle": "FAIL"
+    }
+  },
+  "report": "docs/m6-midterm-results-audit.md"
+}
