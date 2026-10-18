@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "instance_id": "pydata_xarray_5541",
+  "repository": "https://github.com/pydata/xarray.git",
+  "base_commit": "4fb34944ce853bca462b0d1c84787637f2d9e137",
+  "dataset_source": "FormulaCode formulacode-all, 2021-06 configuration",
+  "native_windows_environment": {
+    "python": "CPython 3.10.8",
+    "requirements": "requirements-windows.txt"
+  },
+  "correctness": {
+    "repository_tests": [
+      "xarray/tests/test_variable.py::TestVariable::test_transpose",
+      "xarray/tests/test_variable.py::TestVariable::test_transpose_0d",
+      "xarray/tests/test_variable.py::TestVariable::test_get_axis_num",
+      "xarray/tests/test_dataarray.py::TestDataArray::test_transpose",
+      "xarray/tests/test_dataset.py::TestDataset::test_dataset_transpose",
+      "xarray/tests/test_dataset.py::TestDataset::test_dataset_ellipsis_transpose_different_ordered_vars",
+      "xarray/tests/test_dataset.py::TestDataset::test_dataset_retains_period_index_on_transpose"
+    ],
+    "evaluator_contract_test": "test_xarray_5541_contract.py"
+  },
+  "benchmark": {
+    "runner": "../../../../scripts/evaluation/benchmark-formulacode-xarray-5541.py",
+    "warmups": 1,
+    "primary_samples": 15,
+    "primary_iterations_per_sample": 100000,
+    "auxiliary_samples": 7,
+    "primary": "one-dimensional xarray.Variable.transpose",
+    "auxiliary": "asv_bench.benchmarks.interp.Interpolation.time_interpolation(linear, short)",
+    "profiler_enabled": false,
+    "process_affinity": "not pinned",
+    "process_priority": "default"
+  },
+  "outcome_rule": {
+    "status": "provisional_same_as_m3",
+    "meaningful_gain_fraction": 0.1,
+    "correctness_failure_precedence": "REGRESSION"
+  },
+  "profiling": {
+    "profiler": "CPython cProfile/pstats",
+    "workload_callable": "profile_primary",
+    "benchmark_eligible": false
+  },
+  "separation": {
+    "agent_visible": [
+      "clean repository checkout at base_commit",
+      "agent/task.md",
+      "the same fixed benchmark command",
+      "B1 mechanical profiler evidence or B2 selected context according to group"
+    ],
+    "evaluator_only": [
+      "this manifest and correctness contract test",
+      "raw runtime, test, and profiler artifacts",
+      "gold patch, gold-touched files, and post-edit reference results"
+    ]
+  }
+}

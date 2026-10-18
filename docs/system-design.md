@@ -130,3 +130,7 @@ Agent-visible inputs must exclude expert patches, gold-touched files, gold speed
 ## 12. Deferred features
 
 Jev, MCP productization, multi-agent systems, true self-evolution, complex Skills, model training, learned ranking models, complex databases, and large-scale benchmark execution are explicitly deferred.
+
+## 13. M6 selector MVP
+
+The first B2 selector is deterministic. It combines normalized runtime importance, log-scaled call frequency, task/source lexical relevance with one-hop call-graph propagation, repository ownership, mechanically discovered tests, and a call-graph-centrality risk penalty. It writes the complete ranking and reasons to an audit JSON and emits only the highest-ranked targets that fit the fixed B1-sized context budget. It does not use patches, post-edit results, historical outcomes, or an LLM ranker.

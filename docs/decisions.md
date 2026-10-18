@@ -4,6 +4,12 @@ Only decisions that have actually been made are recorded here. `RESEARCH_PLAN.md
 
 ## Active decisions
 
+### 2026-10-18 — M6 selector MVP uses deterministic evidence features
+
+The first B2 implementation uses fixed, program-computed runtime importance, call frequency, task/call relevance, editability, test support, and call-graph-centrality risk features. This is the smallest auditable implementation of the frozen performance-aware context method that can be compared with B1 under an equal evidence budget.
+
+No repository-specific rule, patch/gold/post-edit input, learned ranker, LLM ranking, experience reuse, or B3 behavior is included. The fixed weights are an MVP engineering choice to evaluate, not a claimed optimal formula. B2 output is capped at B1's 2,182-character evidence size and records the approximate token count.
+
 ### 2026-10-05 — Research direction v2
 
 The active research topic is **Performance-Aware Context Management for LLM-Based Code Performance Optimization**. The study investigates bounded selection of real performance evidence and the reuse of outcomes grounded by executable tests and benchmarks.

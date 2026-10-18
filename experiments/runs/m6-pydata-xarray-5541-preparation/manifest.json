@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "record_status": "frozen_pre_agent_preparation",
+  "classification": "M6 task preparation; no B0/B1/B2 Agent run and no formal comparison result",
+  "task": {
+    "task_id": "pydata_xarray_5541",
+    "repository": "pydata/xarray",
+    "base_commit": "4fb34944ce853bca462b0d1c84787637f2d9e137",
+    "workspace_source_modified": false,
+    "gold_or_post_edit_information_used": false
+  },
+  "environment": {
+    "platform": "Native Windows",
+    "python": "CPython 3.10.8",
+    "numpy": "1.23.5",
+    "pandas": "1.4.4",
+    "scipy": "1.10.1",
+    "pytest": "7.4.4"
+  },
+  "evaluator": {
+    "manifest": "experiments/tasks/formulacode-pydata-xarray-5541/evaluator/manifest.json",
+    "runner": "scripts/evaluation/evaluate-formulacode-xarray-5541.py",
+    "benchmark": "scripts/evaluation/benchmark-formulacode-xarray-5541.py",
+    "correctness_passed": 13,
+    "primary_cv": 0.0166524442128382,
+    "auxiliary_cv": 0.0269215509935514
+  },
+  "profiler": {
+    "name": "cProfile 3.10.8",
+    "status": "PASS",
+    "benchmark_eligible": false,
+    "workspace_unchanged_after": true,
+    "function_count": 36,
+    "relationship_count": 43
+  },
+  "context_read_checks": {
+    "b1": {
+      "status": "PASS",
+      "mechanical_context_characters": 1725,
+      "contains_transpose": true,
+      "contains_get_axis_num": true
+    },
+    "b2": {
+      "status": "PASS",
+      "character_limit": 1725,
+      "characters_used": 1693,
+      "selected": [
+        "xarray/core/variable.py:1381:transpose",
+        "xarray/core/common.py:160:get_axis_num"
+      ]
+    }
+  },
+  "raw_artifacts": {
+    "baseline_directory": "results/raw/m6/pydata_xarray_5541/baseline-frozen-20261018",
+    "profile_directory": "results/raw/profiles/pydata_xarray_5541/baseline-frozen-20261018",
+    "context_check_directory": "results/raw/context-selector/pydata_xarray_5541/baseline-read-check-20261018",
+    "sha256": {
+      "evaluation.json": "8d3b37bc1f1f2f404279c203152525487a730108e5a93c8495af3bd7014b4b7a",
+      "evidence.json": "138ec831645e0c2bee7d4ed16d0416326eb2782968f4bb555e0aed4aa1c8f361",
+      "profile.prof": "35837fde303ba07f3968f6dfe47d3df3f10d9a851b976ecf87de3d3553391c08",
+      "raw_b1_context": "98dececa8ddd9e6ef61887cda510b1654404414b21ebd131cd5383e840ad0d82",
+      "raw_b2_context": "ab56aa00559bf6481f0d9ec0f1444dda659df9f3bc32cfa1c36458e18994bcb9",
+      "raw_b2_selector_audit": "b8898e4e7e60cea802222df3fcb7867168066e54f6a29fb99d3bd443ce5687f8"
+    }
+  }
+}

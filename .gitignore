@@ -11,6 +11,7 @@ obj/
 node_modules/
 npm-debug.log*
 *.log
+~$*.docx
 cmake-build-*/
 CMakeFiles/
 CMakeCache.txt

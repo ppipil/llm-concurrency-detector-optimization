@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "task_id": "pydata_xarray_5541",
+  "base_commit": "4fb34944ce853bca462b0d1c84787637f2d9e137",
+  "correctness": {
+    "status": "PASS",
+    "passed": 13,
+    "wall_time_seconds": 1.21015559998341
+  },
+  "primary": {
+    "workload": "xarray.Variable(('x',), arange(1000.0)).transpose()",
+    "warmups": 1,
+    "iterations_per_sample": 100000,
+    "samples_seconds": [
+      0.49629380000988,
+      0.513020299986238,
+      0.494184399984078,
+      0.496182500006398,
+      0.495904700015672,
+      0.497587799996836,
+      0.499039999995148,
+      0.512908000004245,
+      0.493030099984026,
+      0.508111900009681,
+      0.506130499998108,
+      0.52163240002119,
+      0.507016399991699,
+      0.507918400020571,
+      0.505022099998314
+    ],
+    "mean_seconds": 0.503598886668139,
+    "median_seconds": 0.505022099998314,
+    "std_seconds": 0.00838615236588858,
+    "cv": 0.0166524442128382
+  },
+  "auxiliary": {
+    "workload": "asv_bench.benchmarks.interp.Interpolation.time_interpolation(linear, short)",
+    "warmups": 1,
+    "samples_seconds": [
+      0.0483190000231843,
+      0.0490040000004228,
+      0.0494891999987885,
+      0.0492734999861568,
+      0.0483317000034731,
+      0.0499213000002783,
+      0.0522249000205193
+    ],
+    "mean_seconds": 0.0495090857189747,
+    "median_seconds": 0.0492734999861568,
+    "std_seconds": 0.00133286137582749,
+    "cv": 0.0269215509935514
+  }
+}

@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "record_status": "immutable_calibration_checkpoint",
+  "classification": "B2 performance-aware-context real-repository calibration; excluded from formal experiment data",
+  "task": {
+    "task_id": "hips_autograd_319",
+    "repository": "HIPS/autograd",
+    "base_commit": "809e1b2ba5d7b9d76a7e1a5b67a10089a9c9052a",
+    "group": "B2",
+    "gold_or_post_edit_information_exposed": false
+  },
+  "selector": {
+    "version": "performance-aware-context-mvp-v1",
+    "weights": {
+      "runtime_importance": 0.25,
+      "call_frequency": 0.1,
+      "task_call_relevance": 0.3,
+      "editability": 0.2,
+      "test_support": 0.15,
+      "regression_risk_penalty": 0.1
+    },
+    "budget": {
+      "b1_reference_characters": 2182,
+      "b2_characters_used": 2145,
+      "b1_estimated_tokens": 546,
+      "b2_estimated_tokens": 537,
+      "estimate": "ceil(characters / 4)"
+    },
+    "selected_targets": [
+      { "rank": 1, "symbol": "<lambda>", "location": "autograd/numpy/numpy_grads.py:75", "score": 0.699912 },
+      { "rank": 2, "symbol": "__call__", "location": "autograd/core.py:70", "score": 0.625155 },
+      { "rank": 3, "symbol": "time_rnn_grad", "location": "benchmarks/bench_rnn.py:42", "score": 0.531682 }
+    ],
+    "raw_audit_sha256": "82b019927860ded80a9f518f28305a964fe4c100b4acfabedaff7c84ffa0042a",
+    "public_normalized_audit_sha256": "df1e9d714c48691c15055ed13bcde0f89ea8bd70511e3714da56e2b3087a19da",
+    "context_sha256": "ab883ab8911145a57658ff2b1367d4582a59c015ccc090e02d2c3a851c92b90f",
+    "generated_before_agent": true
+  },
+  "agent": {
+    "harness": "@earendil-works/pi-coding-agent@1.0.3",
+    "provider": "cslab",
+    "model": "CS/DeepSeek-V4-Flash-FP8"
+  },
+  "policy": {
+    "name": "diagnostic-calibration-v2",
+    "max_model_turns": 30,
+    "max_tool_calls": 45,
+    "wall_clock_ms": 600000,
+    "bash_default_timeout_seconds": 60,
+    "provider_token_action_stop": false,
+    "emergency_provider_usage_cap": null
+  },
+  "trajectory": {
+    "first_concrete_hypothesis_ms": 15491,
+    "first_concrete_hypothesis_turn": 2,
+    "first_edit_ms": 42951,
+    "first_edit_turn": 5,
+    "first_targeted_test_ms": 45655,
+    "first_targeted_test_turn": 6,
+    "model_turns": 30,
+    "tool_calls": 34,
+    "tool_counts": { "bash": 21, "edit": 2, "grep": 4, "read": 7 },
+    "wall_clock_ms": 315285,
+    "termination_reason": "model_turn_budget",
+    "termination_kind": "soft",
+    "patch_present": true
+  },
+  "usage": {
+    "provider_total": 494927,
+    "uncached_input": 53401,
+    "cache_read": 431104,
+    "cache_write": 0,
+    "output": 10422,
+    "reasoning": 0,
+    "provider_requests": 30,
+    "current_context_tokens": 28207,
+    "context_window": 128000
+  },
+  "correctness": {
+    "command": ".venv\\Scripts\\python.exe -m pytest tests\\test_scalar_ops.py tests\\test_systematic.py::test_tanh -q --disable-warnings",
+    "exit_code": 0,
+    "passed": 42,
+    "warnings": 17
+  },
+  "benchmark": {
+    "workload": "benchmarks.bench_rnn.RNNSuite.time_rnn_grad",
+    "warmups": 1,
+    "repetitions": 7,
+    "baseline_samples_seconds": [0.25232440000399947, 0.24988380001741461, 0.24724060000153258, 0.2503501999890432, 0.25376250001136214, 0.24592539999866858, 0.24894510000012815],
+    "optimized_samples_seconds": [0.2583059000025969, 0.25053469999693334, 0.2501641999988351, 0.24746939999749884, 0.250142600008985, 0.24323019999428652, 0.24536630001966842],
+    "baseline_mean_seconds": 0.2497760000031641,
+    "baseline_median_seconds": 0.24988380001741461,
+    "baseline_std_seconds": 0.0027286632784941822,
+    "optimized_mean_seconds": 0.24931618571697203,
+    "optimized_median_seconds": 0.250142600008985,
+    "optimized_std_seconds": 0.00482620046420353,
+    "speedup": 1.0018443017843777,
+    "preliminary_outcome": "NO_GAIN"
+  },
+  "artifacts": {
+    "patch": "experiments/runs/m6-hips-autograd-319-b2/agent.patch",
+    "context": "experiments/runs/m6-hips-autograd-319-b2/performance-context.txt",
+    "selector_audit": "experiments/runs/m6-hips-autograd-319-b2/selector-audit.json",
+    "raw_selector_directory": "results/raw/context-selector/hips_autograd_319/B2-pre-agent-v3-20261017",
+    "raw_run_directory": "results/raw/m6/hips_autograd_319/B2-run-20261017",
+    "raw_sha256": {
+      "prompt.md": "4914bf818450255ba4adbaa853ac9bb09b568043ad77182db673eba5e4efa139",
+      "performance-context.txt": "ab883ab8911145a57658ff2b1367d4582a59c015ccc090e02d2c3a851c92b90f",
+      "events.jsonl": "51dae602f1b2509c8a245fff82198c12f7b9121381e531e0bb037f09faade50f",
+      "transcript.json": "6c6142a29e3c4332d82e39e3c9c73fed77fc669624e03a6c73a8ff7aa26d595e",
+      "patch.diff": "6859ef712a1c0c5e3460c5fac66fd810ae84dffe1023af372da5164316fe1d5d",
+      "summary.json": "f84bbd8a315dfc4ebe331c5767bed2b2499bf8a8f3de3fc4d39d3adc620fddfd",
+      "before-benchmark.json": "7dbc278fa6c95a690603a33d62fdf3b664f377429b5f0b26541f9c2b5aec98bc",
+      "after-benchmark.json": "73bc720921f4b190ddce388ff01084b251c8924a64a0e0bf7ebe5cd92a12e2c5"
+    }
+  }
+}

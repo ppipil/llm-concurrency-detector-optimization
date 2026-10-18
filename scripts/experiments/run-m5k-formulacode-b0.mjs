@@ -43,6 +43,12 @@ const EVIDENCE_DIR = process.env.M5K_EVIDENCE_DIR
 const PROFILE_EVIDENCE_PATH = process.env.M5K_PROFILE_EVIDENCE
   ? resolve(process.env.M5K_PROFILE_EVIDENCE)
   : null;
+const SELECTED_CONTEXT_PATH = process.env.M5K_SELECTED_CONTEXT
+  ? resolve(process.env.M5K_SELECTED_CONTEXT)
+  : null;
+const SELECTOR_AUDIT_PATH = process.env.M5K_SELECTOR_AUDIT
+  ? resolve(process.env.M5K_SELECTOR_AUDIT)
+  : null;
 const EXPECTED_REVISION = process.env.M5K_BASE_COMMIT ?? null;
 const PROVIDER = "cslab";
 const BASE_URL = "https://llm.cs.cityu.edu.hk/v1";
@@ -98,7 +104,7 @@ function textOf(message) {
 
 async function main() {
   if (process.platform !== "win32") throw new Error("Native Windows only");
-  if (!["B0", "B1"].includes(GROUP)) throw new Error(`Unsupported calibration group: ${GROUP}`);
+  if (!["B0", "B1", "B2"].includes(GROUP)) throw new Error(`Unsupported calibration group: ${GROUP}`);
   const apiKey = process.env.CSLAB_API_KEY;
   if (!apiKey) throw new Error("CSLAB_API_KEY is missing from the current process");
 
@@ -137,6 +143,34 @@ async function main() {
       runId: profileDocument.run_id,
       profiler: profileDocument.profiler?.name,
       topK: 8,
+      generatedBeforeAgent: true,
+    };
+  } else if (GROUP === "B2") {
+    if (!SELECTED_CONTEXT_PATH || !SELECTOR_AUDIT_PATH) {
+      throw new Error("M5K_SELECTED_CONTEXT and M5K_SELECTOR_AUDIT are required for B2");
+    }
+    const normalizedContextPath = SELECTED_CONTEXT_PATH.replaceAll("\\", "/").toLowerCase();
+    const normalizedAuditPath = SELECTOR_AUDIT_PATH.replaceAll("\\", "/").toLowerCase();
+    if (!normalizedContextPath.includes("/results/raw/context-selector/") || !normalizedAuditPath.includes("/results/raw/context-selector/")) {
+      throw new Error("B2 inputs must come from the pre-Agent context-selector output tree");
+    }
+    performanceContext = (await readFile(SELECTED_CONTEXT_PATH, "utf8")).trim();
+    const auditRaw = await readFile(SELECTOR_AUDIT_PATH, "utf8");
+    const audit = JSON.parse(auditRaw);
+    if (audit.inputs?.task_id !== TASK_ID || audit.inputs?.base_commit !== revision) {
+      throw new Error("B2 selector audit task or revision does not match the calibration checkout");
+    }
+    if (audit.inputs?.forbidden_post_edit_inputs_used !== false || audit.context !== performanceContext) {
+      throw new Error("B2 selector audit failed isolation or context-integrity validation");
+    }
+    performanceEvidence = {
+      source: SELECTED_CONTEXT_PATH,
+      sha256: createHash("sha256").update(`${performanceContext}\n`).digest("hex"),
+      selectorAudit: SELECTOR_AUDIT_PATH,
+      selectorAuditSha256: createHash("sha256").update(auditRaw).digest("hex"),
+      selectorVersion: audit.selector_version,
+      selectedTargetIds: audit.selected_target_ids,
+      budget: audit.budget,
       generatedBeforeAgent: true,
     };
   }

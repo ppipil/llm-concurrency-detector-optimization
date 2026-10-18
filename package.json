@@ -13,6 +13,7 @@
     "evaluate:sympy-20228": "node scripts/evaluation/evaluate-sympy-20228.mjs",
     "evaluate:sympy-21391-sanity": "node scripts/evaluation/evaluate-sympy-21391-sanity.mjs",
     "profile:sympy-20228": "workspaces\\m2-sympy-20228\\.venv\\Scripts\\python.exe scripts\\performance-evidence\\collect_sympy_20228.py",
+    "test:selector": "node --test scripts/performance-evidence/*.test.mjs",
     "m5:agent": "node scripts/experiments/run-m5-agent.mjs",
     "m5c:agent": "node scripts/experiments/run-m5-agent.mjs",
     "m5d:agent": "node scripts/experiments/run-m5-agent.mjs --mode m5d-fast",

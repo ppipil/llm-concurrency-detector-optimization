@@ -1,0 +1,31 @@
+PERFORMANCE-AWARE CONTEXT
+selector=performance-aware-context-mvp-v1; ranking=deterministic weighted evidence; budget_chars=2182; profiler times include overhead and are not benchmark runtimes.
+weights=runtime:0.25 calls:0.1 task_call_relevance:0.3 editability:0.2 test_support:0.15 minus_risk:0.1
+Use these selected targets as bounded evidence, not as a required patch location.
+
+TARGET 1 score=0.699912
+symbol=<lambda> @ autograd/numpy/numpy_grads.py:75
+runtime=self 0.000664s (0.21%), cumulative 0.007214s, calls 50
+features=runtime:0.02285 calls:0.508662 relevance:1 editable:1 tests:1 risk:0.066667
+source=anp.tanh.defvjp( lambda g, ans, vs, gvs, x : g / anp.cosh(x) **2)
+call_relation=called_by vjp @ autograd/core.py:87 (50 calls)
+related_tests=tests/test_jacobian.py, tests/test_scalar_ops.py, tests/test_systematic.py
+selection_reason=frequent execution; task terms at source: cosh, tanh; repository-owned source is directly editable; 4 related test file(s) discovered
+
+TARGET 2 score=0.625155
+symbol=__call__ @ autograd/core.py:70
+runtime=self 0.014940s (4.73%), cumulative 0.284978s, calls 597
+features=runtime:0.902626 calls:0.827142 relevance:0.597614 editable:1 tests:0.25 risk:1
+source=def __call__(self, *args, **kwargs):
+call_relation=called_by grad_tensordot @ autograd/numpy/numpy_grads.py:287 (202 calls)
+related_tests=tests/test_numpy.py
+selection_reason=high measured runtime contribution; frequent execution; task terms at source: call; repository-owned source is directly editable; 1 related test file(s) discovered; higher call-graph centrality raises regression risk
+
+TARGET 3 score=0.531682
+symbol=time_rnn_grad @ benchmarks/bench_rnn.py:42
+runtime=self 0.000002s (0.00%), cumulative 0.293692s, calls 1
+features=runtime:0.930226 calls:0.089673 relevance:0.322749 editable:1 tests:0 risk:0.066667
+source=def time_rnn_grad(self):
+call_relation=called_by measure @ scripts/evaluation/benchmark-formulacode-autograd-319.py:14 (1 calls)
+related_tests=none mechanically identified
+selection_reason=high measured runtime contribution; one-hop call relation to a task-matched frame; repository-owned source is directly editable
