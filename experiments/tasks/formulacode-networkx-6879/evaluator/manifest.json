@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "instance_id": "networkx_networkx_6879",
+  "repository": "https://github.com/networkx/networkx.git",
+  "base_commit": "588326364848a165b045e419a63a4e62d568c615",
+  "dataset_source": "FormulaCode human-validated verified subset",
+  "native_windows_environment": {
+    "python": "CPython 3.10.8",
+    "requirements": "requirements-windows.txt",
+    "editable_install": true
+  },
+  "correctness": {
+    "repository_tests": [
+      "networkx/drawing/tests/test_layout.py::TestLayout::test_rescale_layout_dict"
+    ],
+    "evaluator_contract_test": "test_networkx_6879_contract.py"
+  },
+  "benchmark": {
+    "runner": "../../../../scripts/evaluation/benchmark-formulacode-networkx-6879.py",
+    "warmups": 10,
+    "primary_samples": 15,
+    "primary_iterations_per_sample": 100,
+    "primary_points": 100000,
+    "primary_dimensions": 3,
+    "profiler_enabled": false,
+    "process_affinity": "not pinned",
+    "process_priority": "default"
+  },
+  "outcome_rule": {
+    "status": "provisional_same_as_m3",
+    "meaningful_gain_fraction": 0.1,
+    "correctness_failure_precedence": "REGRESSION"
+  },
+  "profiling": {
+    "profiler": "CPython cProfile/pstats",
+    "workload_callable": "profile_primary",
+    "benchmark_eligible": false
+  },
+  "separation": {
+    "agent_visible": [
+      "clean repository checkout at base_commit",
+      "agent/task.md",
+      "the same fixed benchmark command",
+      "B1 mechanical profiler evidence or B2 selected context according to group"
+    ],
+    "evaluator_only": [
+      "this manifest and correctness contract test",
+      "raw runtime, test, and profiler artifacts",
+      "gold patch, gold-touched files, and post-edit reference results"
+    ]
+  }
+}

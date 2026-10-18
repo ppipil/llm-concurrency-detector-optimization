@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "record_status": "frozen_pre_agent_preparation",
+  "classification": "M6 task preparation; no B0/B1/B2 Agent run and no formal comparison result",
+  "task": {
+    "task_id": "networkx_networkx_6879",
+    "repository": "networkx/networkx",
+    "base_commit": "588326364848a165b045e419a63a4e62d568c615",
+    "workspace_source_modified": false,
+    "gold_or_post_edit_information_used": false
+  },
+  "environment": {
+    "platform": "Native Windows",
+    "python": "CPython 3.10.8",
+    "numpy": "1.23.5",
+    "scipy": "1.10.1",
+    "pytest": "7.4.4",
+    "networkx_install": "editable base-commit checkout"
+  },
+  "evaluator": {
+    "manifest": "experiments/tasks/formulacode-networkx-6879/evaluator/manifest.json",
+    "runner": "scripts/evaluation/evaluate-formulacode-networkx-6879.py",
+    "benchmark": "scripts/evaluation/benchmark-formulacode-networkx-6879.py",
+    "correctness_passed": 7,
+    "baseline_run_1_cv": 0.04194988040825726,
+    "baseline_run_2_cv": 0.04948610777680083,
+    "relative_mean_difference": 0.01799
+  },
+  "profiler": {
+    "name": "cProfile 3.10.8",
+    "status": "PASS",
+    "benchmark_eligible": false,
+    "workspace_unchanged_after": true,
+    "function_count": 36,
+    "relationship_count": 38,
+    "repository_hotspot": "networkx/drawing/layout.py:1222:rescale_layout"
+  },
+  "context_read_checks": {
+    "b1": {
+      "status": "PASS",
+      "mechanical_context_characters": 2029,
+      "contains_rescale_layout": true
+    },
+    "b2": {
+      "status": "PASS",
+      "character_limit": 2029,
+      "characters_used": 1062,
+      "selected": ["networkx/drawing/layout.py:1222:rescale_layout"]
+    }
+  },
+  "measured_phase_seconds": {
+    "checkout": 7.8,
+    "environment_install": 22.716,
+    "successful_target_test": 0.621,
+    "benchmark_protocol_calibration_and_two_frozen_runs": 17.462,
+    "profiler": 0.688,
+    "b1_b2_read_checks": 0.634,
+    "artifact_and_selector_validation": 0.43
+  },
+  "raw_artifacts": {
+    "baseline_directory": "results/raw/m6/networkx_networkx_6879/baseline-frozen-20261018-v3",
+    "repeat_directory": "results/raw/m6/networkx_networkx_6879/baseline-repeat-20261018",
+    "profile_directory": "results/raw/profiles/networkx_networkx_6879/baseline-frozen-20261018",
+    "context_check_directory": "results/raw/context-selector/networkx_networkx_6879/baseline-read-check-20261018",
+    "sha256": {
+      "evaluation.json": "3d863a12fe54a031b194b6557b4116125203c3a918a1594fed39a4e7dd7f9f40",
+      "benchmark.json": "542fb66ad7b927093eab21acdf7f10a7866c6464ba09b5530d9ce8621bc12384",
+      "evidence.json": "f19e2ce3f0c709ad35a703779ec3b2897a0897198002043473fd065c13f5355c",
+      "profile.prof": "1f771c39a5e3b9b0a4e5f8dc89a8919fb4a28c7eb83f8290ad4d86fdc9c9740e",
+      "raw_b1_context": "34da54a1ec0f1dd9fb172c6b4701aa3d65a95d4414d139023ad0cdd330f5155f",
+      "raw_b2_context": "832243530d72b4ddb5d465de5e26fe3b3d9378a94bbe479ab5bb7813e73258f2",
+      "raw_b2_selector_audit": "274a825865bcb1aaee894eb26ac3c149d7cd155fcdc922beb2e32a5e60215e36"
+    }
+  }
+}

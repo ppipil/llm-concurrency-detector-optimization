@@ -1,0 +1,27 @@
+diff --git a/xarray/core/variable.py b/xarray/core/variable.py
+index 78dae44b..53e2c632 100644
+--- a/xarray/core/variable.py
++++ b/xarray/core/variable.py
+@@ -1403,14 +1403,17 @@ class Variable(AbstractArray, NdimSizeLenMixin, VariableArithmetic):
+         numpy.transpose
+         """
+         if len(dims) == 0:
++            if self.ndim < 2:
++                # no need to transpose if there is only one dimension
++                return self.copy(deep=False)
+             dims = self.dims[::-1]
+-        dims = tuple(infix_dims(dims, self.dims))
+-        axes = self.get_axis_num(dims)
+-        if len(dims) < 2 or dims == self.dims:
+-            # no need to transpose if only one dimension
+-            # or dims are in same order
+-            return self.copy(deep=False)
++        else:
++            dims = tuple(infix_dims(dims, self.dims))
++            if dims == self.dims:
++                # no need to transpose if dims are already in the same order
++                return self.copy(deep=False)
+ 
++        axes = self.get_axis_num(dims)
+         data = as_indexable(self._data).transpose(axes)
+         return self._replace(dims=dims, data=data)

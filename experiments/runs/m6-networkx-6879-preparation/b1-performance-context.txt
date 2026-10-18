@@ -1,0 +1,43 @@
+PROFILER EVIDENCE
+source=cProfile 3.10.8; ordering=mechanical descending runtime; top_k=8; profiling times include overhead and are not benchmark runtimes; evaluator and measurement-wrapper frames are filtered only for information-boundary safety.
+
+SYMBOLS
+F1 rescale_layout @ networkx/drawing/layout.py:1222
+F2 <method 'reduce' of 'numpy.ufunc' objects> @ ~:?
+F3 <built-in method builtins.abs> @ ~:?
+F4 <method 'normal' of 'numpy.random._generator.Generator' objects> @ ~:?
+F5 _mean @ D:/pp/ec/论文/llm-concurrency-detector-optimization/workspaces/m6-networkx-6879-precheck/.venv/Lib/site-packages/numpy/core/_methods.py:163
+F6 _count_reduce_items @ D:/pp/ec/论文/llm-concurrency-detector-optimization/workspaces/m6-networkx-6879-precheck/.venv/Lib/site-packages/numpy/core/_methods.py:66
+F7 <method 'mean' of 'numpy.ndarray' objects> @ ~:?
+F8 <method 'max' of 'numpy.ndarray' objects> @ ~:?
+F9 _amax @ D:/pp/ec/论文/llm-concurrency-detector-optimization/workspaces/m6-networkx-6879-precheck/.venv/Lib/site-packages/numpy/core/_methods.py:38
+
+SELF_TIME_TOP_8
+1 F1 calls=100 self=0.041969s share=41.80%
+2 F2 calls=600 self=0.025986s share=25.88%
+3 F3 calls=300 self=0.025010s share=24.91%
+4 F4 calls=1 self=0.004136s share=4.12%
+5 F5 calls=300 self=0.001096s share=1.09%
+6 F6 calls=300 self=0.000699s share=0.70%
+7 F7 calls=300 self=0.000249s share=0.25%
+8 F8 calls=300 self=0.000220s share=0.22%
+
+CUMULATIVE_TIME_TOP_8
+1 F1 calls=100 cumulative=0.095877s
+2 F2 calls=600 cumulative=0.025986s
+3 F3 calls=300 cumulative=0.025010s
+4 F7 calls=300 cumulative=0.021899s
+5 F5 calls=300 cumulative=0.021651s
+6 F8 calls=300 cumulative=0.006858s
+7 F9 calls=300 cumulative=0.006637s
+8 F4 calls=1 cumulative=0.004136s
+
+CALL_EDGES_TOP_8
+1 F1>F3 calls=300 cumulative=0.025010s
+2 F1>F7 calls=300 cumulative=0.021899s
+3 F7>F5 calls=300 cumulative=0.021651s
+4 F5>F2 calls=300 cumulative=0.019483s
+5 F1>F8 calls=300 cumulative=0.006858s
+6 F8>F9 calls=300 cumulative=0.006637s
+7 F9>F2 calls=300 cumulative=0.006503s
+8 F5>F6 calls=300 cumulative=0.000767s
